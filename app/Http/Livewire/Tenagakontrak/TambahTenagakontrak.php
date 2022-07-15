@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\ComponentConcerns\ValidatesInput;
 use Livewire\WithFileUploads;
+use Spatie\Permission\Models\Role;
 
 class TambahTenagakontrak extends Component
 {
@@ -38,13 +39,13 @@ class TambahTenagakontrak extends Component
             $exception = DB::transaction(function () use ($foto) {
                 // Do your SQL here
                 $user = User::create([
+                    'name' => $this->nama,
                     'email' => $this->email,
                     'password' => Hash::make('password')
                 ]);
 
                 Employee::create([
                     'user_id' => $user->id,
-                    'name' => $this->nama,
                     'birthplace' => $this->tempat,
                     'birthdate' => $this->tanggal,
                     'last_education' => $this->pendidikan,
@@ -52,6 +53,9 @@ class TambahTenagakontrak extends Component
                     'address' => $this->alamat,
                     'image' => $foto,
                 ]);
+
+                $role = Role::where('name', 'tenaga kontrak')->first();
+                $user->assignRole($role);
             });
 
             if (is_null($exception)) {
@@ -62,10 +66,12 @@ class TambahTenagakontrak extends Component
                     'message' => 'Data Berhasil Ditambahkan!',
                     'text' => 'ini telah disimpan di tabel Tenaga Kontrak.'
                 ]);
+                $this->emit('render');
             } else {
                 throw new Exception();
             }
         } catch (Exception $e) {
+            dd($e);
             $this->dispatchBrowserEvent('swal:error', [
                 'type' => 'success',
                 'message' => 'Terjadi Kesalahan!',

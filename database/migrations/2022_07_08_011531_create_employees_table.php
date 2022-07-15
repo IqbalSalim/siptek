@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigInteger('user_id')->primary();
-            $table->string('name');
             $table->string('birthplace');
             $table->date('birthdate');
             $table->string('last_education');

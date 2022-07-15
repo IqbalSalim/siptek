@@ -33,7 +33,7 @@
                 <div class="flex flex-row items-center justify-between mt-2">
                     <div>
                         <label for="table-search" class="sr-only">Item</label>
-                        <select
+                        <select wire:model='paginate'
                             class="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -51,109 +51,87 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input type="text" id="table-search"
+                            <input type="text" id="table-search" wire:model='search'
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Cari berdasarkan nama">
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
 
-                        <th scope="col" class="px-6 py-3">
-                            Nama
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Tempat Tanggal Lahir
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Pendidikan Terakhir
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            No Telepon
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Alamat
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            @if ($employees->isNotEmpty())
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
 
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                            <div class="flex flex-row space-x-3">
-                                <div class="w-10">
-                                    <img src="{{ asset('images/avatar/60111.jpg') }}" alt=""
-                                        class="object-cover rounded-lg">
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800 dark:text-white">Hendik Sam</p>
-                                    <span class="text-xs text-gray-400">samjanson@gmail.com</span>
-                                </div>
-                            </div>
-                        </th>
-                        <td class="px-6 py-4">
-                            Kotamobagu, 10 Mei 1998
-                        </td>
-                        <td class="px-6 py-4">
-                            S1-Sistem Informasi
-                        </td>
-                        <td class="px-6 py-4">
-                            082271562663
-                        </td>
-                        <td class="px-6 py-4">
-                            Jalan Kartini, Kel. Heledulaa, Kota Barat
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="col" class="px-6 py-3">
+                                Nama
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Tempat Tanggal Lahir
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Pendidikan Terakhir
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                No Telepon
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Alamat
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($employees as $row)
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                            <div class="flex flex-row space-x-3">
-                                <div class="w-10">
-                                    <img src="{{ asset('images/avatar/60111.jpg') }}" alt=""
-                                        class="object-cover rounded-lg">
-                                </div>
-                                <div>
-                                    <p class="font-medium text-white">Hendik Sam</p>
-                                    <span class="text-xs text-gray-400">samjanson@gmail.com</span>
-                                </div>
-                            </div>
-                        </th>
-                        <td class="px-6 py-4">
-                            Kotamobagu, 10 Mei 1998
-                        </td>
-                        <td class="px-6 py-4">
-                            S1-Sistem Informasi
-                        </td>
-                        <td class="px-6 py-4">
-                            082271562663
-                        </td>
-                        <td class="px-6 py-4">
-                            Jalan Kartini, Kel. Heledulaa, Kota Barat
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    <div class="flex flex-row space-x-3">
+                                        <div class="w-10 h-10">
+                                            <img src="{{ asset('storage/' . $row->image) }}" alt=""
+                                                class="object-cover w-10 h-10 rounded-lg">
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800 dark:text-white">
+                                                {{ $row->user->name }}</p>
+                                            <span class="text-xs text-gray-400">{{ $row->user->email }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $row->birthplace . ', ' . $row->birthdate }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $row->last_education }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $row->phone }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $row->address }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="#"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
 
 
 
-                </tbody>
-            </table>
+
+                    </tbody>
+                </table>
+            @else
+                <p class="px-4 py-2 mt-2 text-2xl font-bold text-center text-red-500 animate-pulse">
+                    Data tidak ditemukan!
+                </p>
+            @endif
         </div>
         {{-- End Tabel Tenaga Kontrak --}}
     </div>

@@ -23,12 +23,6 @@ class UserSeeder extends Seeder
                 'password' => 'password',
                 'role' => 'admin',
             ],
-            [
-                'name' => 'Zulkifli Halid',
-                'email' => 'zulkifli@gmail.com',
-                'password' => 'password',
-                'role' => 'tenaga kontrak',
-            ],
         ];
 
         foreach ($users as $row) {
