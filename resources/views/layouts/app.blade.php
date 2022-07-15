@@ -61,6 +61,27 @@
             document.getElementById("logo").src = "{{ asset('images/logo.png') }}";
         }
     </script>
+
+    <script>
+        window.addEventListener('swal:success', event => {
+            swal({
+                title: event.detail.message,
+                text: event.detail.text,
+                icon: event.detail.type,
+                buttons: false,
+                timer: 1500,
+            });
+        });
+
+        window.addEventListener('swal:error', event => {
+            swal({
+                title: event.detail.message,
+                text: event.detail.text,
+                icon: "warning",
+                buttons: "Periksa",
+            });
+        });
+    </script>
 </body>
 
 </html>

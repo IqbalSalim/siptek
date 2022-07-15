@@ -20,7 +20,7 @@ class TambahTenagakontrak extends Component
 
     protected $rules = [
         'nama' => 'required|string|max:255',
-        'email' => 'required|email',
+        'email' => 'required|email|unique:users,email',
         'tempat' => 'required|string|max:255',
         'tanggal' => 'required|date',
         'nohp' => 'required|numeric|digits_between:9,13',
@@ -55,15 +55,34 @@ class TambahTenagakontrak extends Component
             });
 
             if (is_null($exception)) {
-                dd("berhasil simpan");
+                $this->resetInput();
+                $this->dispatchBrowserEvent('close-modal-tambah');
+                $this->dispatchBrowserEvent('swal:success', [
+                    'type' => 'success',
+                    'message' => 'Data Berhasil Ditambahkan!',
+                    'text' => 'ini telah disimpan di tabel Tenaga Kontrak.'
+                ]);
             } else {
                 throw new Exception();
             }
         } catch (Exception $e) {
-            dd($e);
+            $this->dispatchBrowserEvent('swal:error', [
+                'type' => 'success',
+                'message' => 'Terjadi Kesalahan!',
+                'text' => 'silahkan periksa kembali inputan atau hubungi developer.'
+            ]);
         }
+    }
 
-
-        dd('lolos validasi');
+    public function resetInput()
+    {
+        $this->nama = null;
+        $this->tempat = null;
+        $this->tanggal = null;
+        $this->email = null;
+        $this->pendidikan = null;
+        $this->nohp = null;
+        $this->alamat = null;
+        $this->foto = null;
     }
 }

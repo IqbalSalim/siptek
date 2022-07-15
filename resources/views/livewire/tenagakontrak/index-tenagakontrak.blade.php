@@ -1,4 +1,4 @@
-<div x-cloak x-data="{ modalTambah: false }">
+<div x-cloak x-data="{ modalTambah: false }" x-on:close-modal-tambah="modalTambah=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-white">
             {{ __('Tenaga Kontrak') }}
