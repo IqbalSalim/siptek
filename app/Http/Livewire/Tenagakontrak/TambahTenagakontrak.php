@@ -6,7 +6,9 @@ use App\Models\Employee;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\ComponentConcerns\ValidatesInput;
 use Livewire\WithFileUploads;
@@ -24,6 +26,7 @@ class TambahTenagakontrak extends Component
         'email' => 'required|email|unique:users,email',
         'tempat' => 'required|string|max:255',
         'tanggal' => 'required|date',
+        'pendidikan' => 'required|string|max:255',
         'nohp' => 'required|numeric|digits_between:9,13',
         'alamat' => 'required|string|max:255',
         'foto' => 'required|image|max:2048'
@@ -71,7 +74,9 @@ class TambahTenagakontrak extends Component
                 throw new Exception();
             }
         } catch (Exception $e) {
-            dd($e);
+            if (Storage::disk('public')->exists($foto)) {
+                Storage::disk('public')->delete($foto);
+            }
             $this->dispatchBrowserEvent('swal:error', [
                 'type' => 'success',
                 'message' => 'Terjadi Kesalahan!',

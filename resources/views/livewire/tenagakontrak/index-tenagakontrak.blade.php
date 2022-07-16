@@ -1,4 +1,4 @@
-<div x-cloak x-data="{ modalTambah: false }" x-on:close-modal-tambah="modalTambah=false">
+<div x-cloak x-data="{ modalTambah: false, modalEdit: false }" x-on:close-modal-tambah="modalTambah=false" x-on:close-modal-edit="modalEdit=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-white">
             {{ __('Tenaga Kontrak') }}
@@ -11,6 +11,7 @@
     </x-slot>
 
     <livewire:tenagakontrak.tambah-tenagakontrak></livewire:tenagakontrak.tambah-tenagakontrak>
+    <livewire:tenagakontrak.edit-tenagakontrak></livewire:tenagakontrak.edit-tenagakontrak>
 
     <div id="content">
         {{-- Tabel Tenaga Kontrak --}}
@@ -93,7 +94,7 @@
                                     class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                     <div class="flex flex-row space-x-3">
                                         <div class="w-10 h-10">
-                                            <img src="{{ asset('storage/' . $row->image) }}" alt=""
+                                            <img src="{{ asset($row->image) }}" alt=""
                                                 class="object-cover w-10 h-10 rounded-lg">
                                         </div>
                                         <div>
@@ -116,17 +117,16 @@
                                     {{ $row->address }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <button @click="modalEdit=true"
+                                        wire:click.prevent="$emit('getEmployee', {{ $row->user_id }})"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                                 </td>
                             </tr>
                         @endforeach
 
-
-
-
                     </tbody>
                 </table>
+                {{ $employees->links() }}
             @else
                 <p class="px-4 py-2 mt-2 text-2xl font-bold text-center text-red-500 animate-pulse">
                     Data tidak ditemukan!

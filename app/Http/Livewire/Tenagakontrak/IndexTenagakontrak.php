@@ -12,7 +12,6 @@ class IndexTenagakontrak extends Component
     use WithPagination;
 
     public $paginate = 10, $search = null;
-
     protected $listeners = ['render'];
 
     public function render()
