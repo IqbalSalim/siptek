@@ -17,96 +17,106 @@
                     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit Tenaga Kontrak</h3>
                     <form class="space-y-6" wire:submit.prevent="update" novalidate>
                         @csrf
-                        <div class="flex flex-row items-start justify-between space-x-6">
-                            <div class="flex-1">
-                                <label for="nama">Nama Lengkap</label>
-                                <input type="text" wire:model.defer.defer='nama' class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('nama')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
+                        <div class="grid grid-cols-2 space-x-6">
+                            <div class="flex flex-col space-y-4">
+                                <div class="col-span-1">
+                                    <label for="kdAnggota">Kode Anggota</label>
+                                    <input type="text" readonly wire:model.defer='kdAnggota'
+                                        class="mt-1 bg-gray-300 cursor-not-allowed">
+                                    <span class="text-xs text-red-700">
+                                        @error('kdAnggota')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div>
+                                    <label for="nama">Nama Lengkap</label>
+                                    <input type="text" wire:model.defer='nama' class="mt-1">
+                                    <span class="text-xs text-red-700">
+                                        @error('nama')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div>
+                                    <label for="email">Email</label>
+                                    <input type="email" wire:model.defer='email' name="email" id="email"
+                                        class="mt-1">
+                                    <span class="text-xs text-red-700">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div class="flex-1">
+                                    <label for="alamat">Alamat</label>
+                                    <textarea type="text" name="alamat" id="alamat" wire:model.defer='alamat' class="mt-1"></textarea>
+                                    <span class="text-xs text-red-700">
+                                        @error('alamat')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <label for="email">Email</label>
-                                <input type="email" wire:model.defer='email' name="email" id="email"
-                                    class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('email')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex flex-row items-start justify-between space-x-6">
-                            <div class="flex-1">
-                                <label for="tempat">Tempat Lahir</label>
-                                <input type="text" name="tempat" wire:model.defer='tempat' id="tempat"
-                                    class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('tempat')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                            <div class="flex-1">
-                                <label for="tanggal">Tanggal Lahir</label>
-                                <input type="date" name="tanggal" id="tanggal" wire:model.defer='tanggal'
-                                    class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('tanggal')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex flex-row items-start justify-between space-x-6">
-                            <div class="flex-1">
-                                <label for="pendidikan">Pendidikan Terakhir</label>
-                                <input type="text" wire:model.defer='pendidikan' name="pendidikan" id="pendidikan"
-                                    class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('pendidikan')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                            <div class="flex-1">
-                                <label for="nohp">Nomor Handphone</label>
-                                <input type="tel" name="nohp" id="nohp" wire:model.defer='nohp'
-                                    class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('nohp')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex flex-row items-start justify-between space-x-6">
-                            <div class="flex-1">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" name="alamat" id="alamat" wire:model.defer='alamat'
-                                    class="mt-1">
-                                <span class="text-xs text-red-700">
-                                    @error('alamat')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                            <div>
-                                <label for="foto">Foto</label>
-                                <div class="flex flex-row items-start mt-1 space-x-2">
-                                    <div class="w-10 h-10">
-                                        <img src="{{ $foto ? $foto->temporaryUrl() : asset($preview) }}"
-                                            alt="" class="object-cover w-10 h-10 rounded-lg">
-                                    </div>
-                                    <div>
-                                        <input type="file" wire:model.defer='foto' name="foto">
-                                        <span class="block text-xs text-red-700">
-                                            @error('foto')
+                            <div class="flex flex-col space-y-4">
+                                <div>
+                                    <label for="pendidikan">Pendidikan Terakhir</label>
+                                    <input type="text" wire:model.defer='pendidikan' name="pendidikan"
+                                        id="pendidikan" class="mt-1">
+                                    <span class="text-xs text-red-700">
+                                        @error('pendidikan')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div class="flex flex-row space-x-2">
+                                    <div class="flex-1">
+                                        <label for="tempat">Tempat Lahir</label>
+                                        <input type="text" name="tempat" wire:model.defer='tempat' id="tempat"
+                                            class="mt-1">
+                                        <span class="text-xs text-red-700">
+                                            @error('tempat')
                                                 {{ $message }}
                                             @enderror
                                         </span>
+                                    </div>
+                                    <div>
+                                        <label for="tanggal">Tanggal Lahir</label>
+                                        <input type="date" name="tanggal" id="tanggal" wire:model.defer='tanggal'
+                                            class="mt-1">
+                                        <span class="text-xs text-red-700">
+                                            @error('tanggal')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="nohp">Nomor Handphone</label>
+                                    <input type="tel" name="nohp" id="nohp" wire:model.defer='nohp'
+                                        class="mt-1">
+                                    <span class="text-xs text-red-700">
+                                        @error('nohp')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div>
+                                    <label for="foto">Foto</label>
+                                    <div class="flex flex-row items-start mt-1 space-x-2">
+                                        <div class="">
+                                            <img src="{{ $foto ? $foto->temporaryUrl() : asset($preview) }}"
+                                                alt="" class="object-cover w-16 h-16 rounded-lg">
+                                        </div>
+                                        <div>
+                                            <input type="file" wire:model.defer='foto' name="foto">
+                                            <span class="block text-xs text-red-700">
+                                                @error('foto')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

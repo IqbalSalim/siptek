@@ -100,7 +100,7 @@
                                         <div>
                                             <p class="font-medium text-gray-800 dark:text-white">
                                                 {{ $row->user->name }}</p>
-                                            <span class="text-xs text-gray-400">{{ $row->user->email }}</span>
+                                            <span class="text-xs text-gray-400">{{ $row->member_id }}</span>
                                         </div>
                                     </div>
                                 </th>
@@ -111,7 +111,10 @@
                                     {{ $row->last_education }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $row->phone }}
+                                    <div>
+                                        <p class="font-medium">{{ $row->phone }}</p>
+                                        <span> {{ $row->user->email }} </span>
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $row->address }}

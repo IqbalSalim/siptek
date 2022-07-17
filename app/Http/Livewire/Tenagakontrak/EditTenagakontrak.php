@@ -14,7 +14,7 @@ class EditTenagakontrak extends Component
 {
     use WithFileUploads;
 
-    public $employee, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto, $preview, $iteration;
+    public $employee, $kdAnggota, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto, $preview, $iteration;
     public $employee_id;
     protected $listeners = ['getEmployee'];
 
@@ -22,6 +22,7 @@ class EditTenagakontrak extends Component
     {
         $query = Employee::where('user_id', $id)->first();
         $this->employee = $query;
+        $this->kdAnggota = $query->member_id;
         $this->nama = $query->user->name;
         $this->iteration = $query->user_id;
         $this->tempat = $query->birthplace;
@@ -37,7 +38,7 @@ class EditTenagakontrak extends Component
 
     public function closeForm()
     {
-        $this->reset('nama', 'tempat', 'tanggal', 'email', 'pendidikan', 'nohp', 'alamat', 'foto', 'preview');
+        $this->reset('kdAnggota', 'nama', 'tempat', 'tanggal', 'email', 'pendidikan', 'nohp', 'alamat', 'foto', 'preview');
 
         $this->dispatchBrowserEvent('close-modal-edit');
     }

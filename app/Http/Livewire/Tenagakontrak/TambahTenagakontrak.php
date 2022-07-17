@@ -18,10 +18,11 @@ class TambahTenagakontrak extends Component
 {
     use ValidatesInput, WithFileUploads;
 
-    public $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto;
+    public $kdAnggota, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto;
 
 
     protected $rules = [
+        'kdAnggota' => 'required|string|max:16|unique:employees,member_id',
         'nama' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'tempat' => 'required|string|max:255',
@@ -49,6 +50,7 @@ class TambahTenagakontrak extends Component
 
                 Employee::create([
                     'user_id' => $user->id,
+                    'member_id' => $this->kdAnggota,
                     'birthplace' => $this->tempat,
                     'birthdate' => $this->tanggal,
                     'last_education' => $this->pendidikan,
@@ -62,8 +64,7 @@ class TambahTenagakontrak extends Component
             });
 
             if (is_null($exception)) {
-                $this->resetInput();
-                $this->dispatchBrowserEvent('close-modal-tambah');
+                $this->closeForm();
                 $this->dispatchBrowserEvent('swal:success', [
                     'type' => 'success',
                     'message' => 'Data Berhasil Ditambahkan!',
@@ -85,15 +86,10 @@ class TambahTenagakontrak extends Component
         }
     }
 
-    public function resetInput()
+    public function closeForm()
     {
-        $this->nama = null;
-        $this->tempat = null;
-        $this->tanggal = null;
-        $this->email = null;
-        $this->pendidikan = null;
-        $this->nohp = null;
-        $this->alamat = null;
-        $this->foto = null;
+        $this->reset('kdAnggota', 'nama', 'tempat', 'tanggal', 'email', 'pendidikan', 'nohp', 'alamat', 'foto');
+
+        $this->dispatchBrowserEvent('close-modal-tambah');
     }
 }
