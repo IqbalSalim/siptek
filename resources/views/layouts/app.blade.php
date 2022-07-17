@@ -81,6 +81,21 @@
                 buttons: "Periksa",
             });
         });
+
+        window.addEventListener('swal:confirm', event => {
+            swal({
+                    title: 'Apakah anda yakin?',
+                    text: 'Jika dihapus, Anda tidak akan dapat mengembalikan data ini!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.livewire.emit('delete', event.detail);
+                    }
+                });
+        });
     </script>
 </body>
 
