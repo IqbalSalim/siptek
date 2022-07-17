@@ -14,6 +14,7 @@ class Employee extends Model
     protected $fillable = [
         'user_id',
         'member_id',
+        'area_id',
         'birthplace',
         'birthdate',
         'last_education',
@@ -32,5 +33,10 @@ class Employee extends Model
         $query->whereHas('user', function ($query) use ($nama) {
             $query->where('name', 'like', '%' . $nama . '%');
         });
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->bigInteger('user_id')->primary();
             $table->char('member_id', 16);
+            $table->foreignId('area_id')->constrained('areas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('birthplace');
             $table->date('birthdate');
             $table->string('last_education');

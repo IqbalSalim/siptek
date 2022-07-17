@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Tenagakontrak;
 
+use App\Models\Area;
 use App\Models\Employee;
 use App\Models\User;
 use Exception;
@@ -14,15 +15,21 @@ class EditTenagakontrak extends Component
 {
     use WithFileUploads;
 
-    public $employee, $kdAnggota, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto, $preview, $iteration;
-    public $employee_id;
+    public $employee, $kdAnggota, $areaId, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto, $preview, $iteration;
+    public $employee_id, $areas;
     protected $listeners = ['getEmployee'];
+
+    public function mount()
+    {
+        $this->areas = Area::all();
+    }
 
     public function getEmployee($id)
     {
         $query = Employee::where('user_id', $id)->first();
         $this->employee = $query;
         $this->kdAnggota = $query->member_id;
+        $this->areaId = $query->area_id;
         $this->nama = $query->user->name;
         $this->iteration = $query->user_id;
         $this->tempat = $query->birthplace;
@@ -38,8 +45,8 @@ class EditTenagakontrak extends Component
 
     public function closeForm()
     {
-        $this->reset('kdAnggota', 'nama', 'tempat', 'tanggal', 'email', 'pendidikan', 'nohp', 'alamat', 'foto', 'preview');
-
+        $this->reset('kdAnggota', 'areaId', 'nama', 'tempat', 'tanggal', 'email', 'pendidikan', 'nohp', 'alamat', 'foto', 'preview');
+        $this->resetValidation();
         $this->dispatchBrowserEvent('close-modal-edit');
     }
 
@@ -47,6 +54,7 @@ class EditTenagakontrak extends Component
     {
         $this->validate([
             'nama' => 'required|string|max:255',
+            'areaId' => 'required|integer',
             'email' => 'required|email|unique:users,email,' . $this->employee->user_id,
             'tempat' => 'required|string|max:255',
             'tanggal' => 'required|date',
@@ -74,6 +82,7 @@ class EditTenagakontrak extends Component
 
                 $employee = Employee::find($id);
                 $employee->update([
+                    'area_id' => $this->areaId,
                     'birthplace' => $this->tempat,
                     'birthdate' => $this->tanggal,
                     'last_education' => $this->pendidikan,

@@ -100,7 +100,8 @@
                                         <div>
                                             <p class="font-medium text-gray-800 dark:text-white">
                                                 {{ $row->user->name }}</p>
-                                            <span class="text-xs text-gray-400">{{ $row->member_id }}</span>
+                                            <span class="text-xs text-gray-400">{{ $row->member_id }} /
+                                                {{ $row->area->name }}</span>
                                         </div>
                                     </div>
                                 </th>

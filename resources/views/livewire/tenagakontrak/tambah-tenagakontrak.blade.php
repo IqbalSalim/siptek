@@ -5,7 +5,7 @@
             <!-- Modal content -->
             <div
                 class="relative my-auto transition duration-150 ease-in-out bg-white rounded-lg shadow dark:bg-gray-800">
-                <button type="button" @click="modalTambah=false"
+                <button type="button" wire:click='closeForm()'
                     class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -19,14 +19,30 @@
                         @csrf
                         <div class="grid grid-cols-2 space-x-6">
                             <div class="flex flex-col space-y-4">
-                                <div class="col-span-1">
-                                    <label for="kdAnggota">Kode Anggota</label>
-                                    <input type="text" wire:model.defer='kdAnggota' class="mt-1">
-                                    <span class="text-xs text-red-700">
-                                        @error('kdAnggota')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
+                                <div class="flex flex-row space-x-2">
+                                    <div class="flex-1">
+                                        <label for="kdAnggota">Kode Anggota</label>
+                                        <input type="text" wire:model.defer='kdAnggota' class="mt-1">
+                                        <span class="text-xs text-red-700">
+                                            @error('kdAnggota')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <label for="kdAnggota">Bidang</label>
+                                        <select wire:model.defer='areaId' class="mt-1">
+                                            <option value=""></option>
+                                            @foreach ($areas as $row)
+                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-xs text-red-700">
+                                            @error('kdAnggota')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
                                 </div>
                                 <div>
                                     <label for="nama">Nama Lengkap</label>

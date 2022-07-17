@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name'
+    ];
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'area_id', 'id');
+    }
 }

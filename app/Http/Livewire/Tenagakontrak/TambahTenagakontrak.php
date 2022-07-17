@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Tenagakontrak;
 
+use App\Models\Area;
 use App\Models\Employee;
 use App\Models\User;
 use Exception;
@@ -18,11 +19,17 @@ class TambahTenagakontrak extends Component
 {
     use ValidatesInput, WithFileUploads;
 
-    public $kdAnggota, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto;
+    public $kdAnggota, $areaId, $nama, $tempat, $tanggal, $email, $pendidikan, $nohp, $alamat, $foto;
+    public $areas;
 
+    public function mount()
+    {
+        $this->areas = Area::all();
+    }
 
     protected $rules = [
         'kdAnggota' => 'required|string|max:16|unique:employees,member_id',
+        'areaId' => 'required|integer',
         'nama' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'tempat' => 'required|string|max:255',
@@ -51,6 +58,7 @@ class TambahTenagakontrak extends Component
                 Employee::create([
                     'user_id' => $user->id,
                     'member_id' => $this->kdAnggota,
+                    'area_id' => $this->areaId,
                     'birthplace' => $this->tempat,
                     'birthdate' => $this->tanggal,
                     'last_education' => $this->pendidikan,
@@ -89,7 +97,7 @@ class TambahTenagakontrak extends Component
     public function closeForm()
     {
         $this->reset('kdAnggota', 'nama', 'tempat', 'tanggal', 'email', 'pendidikan', 'nohp', 'alamat', 'foto');
-
+        $this->resetValidation();
         $this->dispatchBrowserEvent('close-modal-tambah');
     }
 }
