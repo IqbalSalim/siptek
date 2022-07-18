@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('tenaga-kontrak')" :active="request()->routeIs('tenaga-kontrak')">
                         {{ __('Tenaga Kontrak') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('waktu')" :active="request()->routeIs('waktu')">
+                        {{ __('Waktu') }}
+                    </x-nav-link>
                 </div>
             </div>
 

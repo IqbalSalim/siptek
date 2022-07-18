@@ -2,6 +2,7 @@
 
 
 use App\Http\Livewire\Tenagakontrak\IndexTenagakontrak;
+use App\Http\Livewire\Waktu\IndexWaktu;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,9 @@ Route::get('/dashboard', function () {
 
 Route::group(['prefix' => '/tenaga-kontrak', 'as' => 'tenaga-kontrak', 'middleware' => 'auth'], function () {
     Route::get('/', IndexTenagakontrak::class)->name('');
+});
+Route::group(['prefix' => '/waktu', 'as' => 'waktu', 'middleware' => 'auth'], function () {
+    Route::get('/', IndexWaktu::class)->name('');
 });
 
 
