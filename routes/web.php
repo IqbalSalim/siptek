@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Livewire\Presensi\IndexPresensi;
 use App\Http\Livewire\Tenagakontrak\IndexTenagakontrak;
 use App\Http\Livewire\Waktu\IndexWaktu;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +29,10 @@ Route::group(['prefix' => '/tenaga-kontrak', 'as' => 'tenaga-kontrak', 'middlewa
 });
 Route::group(['prefix' => '/waktu', 'as' => 'waktu', 'middleware' => 'auth'], function () {
     Route::get('/', IndexWaktu::class)->name('');
+});
+
+Route::group(['prefix' => '/presensi', 'as' => 'presensi', 'middleware' => 'auth'], function () {
+    Route::get('/', IndexPresensi::class)->name('');
 });
 
 
