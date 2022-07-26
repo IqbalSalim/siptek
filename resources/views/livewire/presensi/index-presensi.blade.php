@@ -1,4 +1,4 @@
-<div x-cloak x-data="{ modalWfo: false }" x-on:close-modal-wfo="modalWfo=false">
+<div x-cloak x-data="{ modalWfo: false, modalDl: false }" x-on:close-modal-wfo="modalWfo=false" x-on:close-modal-dl="modalDl=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-white">
             {{ __('Presensi') }}
@@ -11,6 +11,7 @@
     </x-slot>
 
     <livewire:presensi.wfo-presensi></livewire:presensi.wfo-presensi>
+    <livewire:presensi.dl-presensi></livewire:presensi.dl-presensi>
 
     <div id="content">
         <div class="flex flex-row space-x-4">
@@ -72,12 +73,12 @@
                 <div class="flex flex-col divide-y-2">
                     @if ($presences)
                         @foreach ($presences as $row)
-                            <div class="flex flex-row items-center space-x-4">
+                            <div class="grid items-center grid-cols-4 space-x-4">
                                 <div class="px-6 py-2">
-                                    <img src="{{ asset($row->come_photo) }}" alt=""
-                                        class="w-10 h-10 bg-cover rounded-lg">
+                                    <img src="{{ $row->come_photo ? asset($row->come_photo) : asset('images/no-image.jfif') }}"
+                                        alt="" class="w-10 h-10 bg-cover rounded-lg">
                                 </div>
-                                <div class="flex-1 mx-auto">
+                                <div class="col-span-2 mx-auto">
                                     <div class="relative mx-auto">
                                         <p class="font-medium text">{{ $row->created_at->isoFormat('dddd, D MMMM Y') }}
                                         </p>
@@ -89,8 +90,9 @@
                                     </div>
                                 </div>
                                 <div class="px-6 py-2">
-                                    <div class="px-2 py-2 bg-blue-500 rounded-lg">
-                                        <span class="text-sm font-medium text-white uppercase">wfo</span>
+                                    <div class="px-2 py-2 text-center bg-blue-500 rounded-lg">
+                                        <span
+                                            class="text-sm font-medium text-white uppercase">{{ $row->type }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -113,13 +115,17 @@
             <div class="w-full md:w-1/2">
                 <div class="flex flex-row justify-center space-x-4">
                     <div class="flex flex-col items-center">
-                        <button class="shadow-lg btn-primary" @click='modalWfo=true'>
+                        <button {{ $typeToDay == 'DL' ? 'disabled' : null }}
+                            class="shadow-lg {{ $typeToDay == 'DL' ? 'btn-danger cursor-not-allowed' : 'btn-primary' }}"
+                            @click='modalWfo=true'>
                             <x-ilustration.wfo class="w-32 h-32" />
                             <span class="font-bold text-white">W F O</span>
                         </button>
                     </div>
                     <div class="flex flex-col items-center">
-                        <button class="shadow-lg {{ $comeToDay ? 'btn-danger cursor-not-allowed' : 'btn-primary' }}">
+                        <button {{ $typeToDay == 'WFO' || $file ? 'disabled' : null }}
+                            class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }}"
+                            @click='modalDl=true'>
                             <x-ilustration.dl class="w-32 h-32" />
                             <span class="font-bold text-white">D L</span>
                         </button>

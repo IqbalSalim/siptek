@@ -23,6 +23,7 @@ return new class extends Migration
             $table->time('come_presence')->nullable();
             $table->time('go_presence')->nullable();
             $table->string('description')->nullable();
+            $table->enum('status', ['approved', 'submission', 'rejected'])->nullable();
             $table->timestamps();
         });
     }

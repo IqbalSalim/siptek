@@ -30,8 +30,11 @@ class IndexPresensi extends Component
         $presence = Presence::where('user_id', $this->userId)->whereDate('created_at', $this->date)->first();
         $presenceToDay = Presence::where('user_id', $this->userId)->whereDate('created_at', Carbon::now())->first();
         $comeToDay = null;
+        $typeToDay = null;
+        $file = null;
         if ($presenceToDay) {
-            $comeToDay = $presenceToDay->come_presence;
+            $typeToDay = $presenceToDay->type;
+            $file = $presenceToDay->file;
         }
 
         return view('livewire.presensi.index-presensi', [
@@ -40,7 +43,8 @@ class IndexPresensi extends Component
             'come' => $presence ? $presence->come_presence : null,
             'go' => $presence ? $presence->go_presence : null,
             'status' => $presence ? $presence->type : null,
-            'comeToDay' => $comeToDay
+            'typeToDay' => $typeToDay,
+            'file' => $file,
         ]);
     }
 

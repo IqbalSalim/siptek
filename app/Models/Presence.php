@@ -17,6 +17,8 @@ class Presence extends Model
         'come_presence',
         'go_presence',
         'description',
+        'file',
+        'status',
     ];
 
     public function user()
