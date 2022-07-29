@@ -16,31 +16,19 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $array = [
-            'admin',
-            'tenaga kontrak',
-        ];
-        foreach ($array as $row) {
-            Role::create(['name' => $row]);
-        }
-
-        // $array2 = [
-        //     'olah user',
-        //     'olah profil',
-        //     'olah kegiatan',
-        //     'olah usulan',
-        //     'olah rkp',
-        //     'olah rapb',
-        //     'olah apb',
-        //     'olah warta',
-        //     'olah realisasi',
-        //     'lihat rkp',
-        //     'lihat rapb',
-        //     'lihat apb',
-        //     'lihat warta',
-        //     'lihat realisasi',
-        //     'lihat usulan'
+        // $array = [
+        //     'admin',
+        //     'tenaga kontrak',
         // ];
+        // foreach ($array as $row) {
+        //     Role::create(['name' => $row]);
+        // }
+
+        $array2 = [
+            'olah tk',
+            'olah waktu',
+            'buat presensi',
+        ];
 
         // foreach ($array2 as $row) {
         //     Permission::create(['name' => $row]);
@@ -49,38 +37,14 @@ class RoleSeeder extends Seeder
         // Tambah Permission di Role Admin
         // $role = Role::where('name', 'admin')->first();
         // $role->givePermissionTo([
-        //     'olah user',
-        //     'olah profil',
+        //     'olah tk',
+        //     'olah waktu',
         // ]);
 
-        // // Tambah Permission di Role Kepala Desa
-        // $role = Role::where('name', 'kepala desa')->first();
-        // $role->givePermissionTo([
-        //     'lihat rkp',
-        //     'lihat rapb',
-        //     'lihat apb',
-        //     'lihat realisasi',
-        //     'lihat usulan'
-        // ]);
-
-        // // Tambah Permission di Role Sekretaris
-        // $role = Role::where('name', 'sekretaris')->first();
-        // $role->givePermissionTo([
-        //     'olah profil',
-        //     'olah kegiatan',
-        //     'olah usulan',
-        //     'olah rkp',
-        //     'olah rapb',
-        //     'olah apb',
-        //     'olah warta',
-        //     'olah realisasi',
-        // ]);
-
-        // // Tambah Permission di Role Tim Penyusun
-        // $role = Role::where('name', 'tim penyusun')->first();
-        // $role->givePermissionTo([
-        //     'olah usulan',
-        //     'olah rkp',
-        // ]);
+        // Tambah Permission di Role Tenaga Kontrak
+        $role = Role::where('name', 'tenaga kontrak')->first();
+        $role->givePermissionTo([
+            'buat presensi',
+        ]);
     }
 }

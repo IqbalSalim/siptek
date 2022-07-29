@@ -15,15 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tenaga-kontrak')" :active="request()->routeIs('tenaga-kontrak')">
-                        {{ __('Tenaga Kontrak') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('waktu')" :active="request()->routeIs('waktu')">
-                        {{ __('Waktu Presensi') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('presensi')" :active="request()->routeIs('presensi')">
-                        {{ __('Presensi') }}
-                    </x-nav-link>
+                    @can('olah tk')
+                        <x-nav-link :href="route('tenaga-kontrak')" :active="request()->routeIs('tenaga-kontrak')">
+                            {{ __('Tenaga Kontrak') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('olah waktu')
+                        <x-nav-link :href="route('waktu')" :active="request()->routeIs('waktu')">
+                            {{ __('Waktu Presensi') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('buat presensi')
+                        <x-nav-link :href="route('presensi')" :active="request()->routeIs('presensi')">
+                            {{ __('Presensi') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

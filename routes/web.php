@@ -24,14 +24,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::group(['prefix' => '/tenaga-kontrak', 'as' => 'tenaga-kontrak', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => '/tenaga-kontrak', 'as' => 'tenaga-kontrak', 'middleware' => (['auth', 'can:olah tk'])], function () {
     Route::get('/', IndexTenagakontrak::class)->name('');
 });
-Route::group(['prefix' => '/waktu', 'as' => 'waktu', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => '/waktu', 'as' => 'waktu', 'middleware' => (['auth', 'can:olah waktu'])], function () {
     Route::get('/', IndexWaktu::class)->name('');
 });
 
-Route::group(['prefix' => '/presensi', 'as' => 'presensi', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => '/presensi', 'as' => 'presensi', 'middleware' => (['auth', 'can:buat presensi'])], function () {
     Route::get('/', IndexPresensi::class)->name('');
 });
 
