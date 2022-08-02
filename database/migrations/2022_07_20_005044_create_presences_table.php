@@ -24,6 +24,10 @@ return new class extends Migration
             $table->time('go_presence')->nullable();
             $table->string('description')->nullable();
             $table->enum('status', ['approved', 'submission', 'rejected'])->nullable();
+            $table->integer('late_minutes')->nullable();
+            $table->integer('quick_minutes')->nullable();
+            $table->string('code')->nullable();
+            $table->string('feedback')->nullable();
             $table->timestamps();
         });
     }

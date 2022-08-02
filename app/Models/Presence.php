@@ -19,6 +19,10 @@ class Presence extends Model
         'description',
         'file',
         'status',
+        'code',
+        'feedback',
+        'late_minutes',
+        'quick_minutes',
     ];
 
     public function user()
