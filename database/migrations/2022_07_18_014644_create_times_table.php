@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('day');
             $table->time('come_start_time');
             $table->time('come_end_time');
+            $table->time('come_time');
             $table->time('go_start_time');
             $table->time('go_end_time');
+            $table->time('go_time');
             $table->timestamps();
         });
     }

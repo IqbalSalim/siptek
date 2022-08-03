@@ -32,16 +32,16 @@
                                 Hari
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Mulai Waktu Datang
+                                Rentang Waktu Datang
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Selesai Waktu Datang
+                                Waktu Datang
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Mulai Waktu Pulang
+                                Rentang Waktu Pulang
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Selesai Waktu Pulang
+                                Waktu Pulang
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -56,16 +56,16 @@
                                     {{ $row->day }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $row->come_start_time }}
+                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->come_start_time)->format('H:i') . ' - ' . \Carbon\Carbon::createFromFormat('H:i:s', $row->come_end_time)->format('H:i') }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $row->come_end_time }}
+                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->come_time)->format('H:i') }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $row->go_start_time }}
+                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->go_start_time)->format('H:i') . ' - ' . \Carbon\Carbon::createFromFormat('H:i:s', $row->go_end_time)->format('H:i') }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $row->go_end_time }}
+                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->go_time)->format('H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <button @click="modalEdit=true"

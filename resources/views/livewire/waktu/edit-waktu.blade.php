@@ -28,7 +28,6 @@
                             </span>
                         </div>
                         <div class="flex flex-row space-x-4">
-
                             <div class="flex-1">
                                 <x-time-picker label="Mulai Waktu Datang" format="24"
                                     wire:model.defer="come_start_time" />
@@ -36,6 +35,9 @@
                             <div class="flex-1">
                                 <x-time-picker label="Selesai Waktu Datang" format="24"
                                     wire:model.defer="come_end_time" />
+                            </div>
+                            <div class="flex-1">
+                                <x-time-picker label="Waktu Datang" format="24" wire:model.defer="come_time" />
                             </div>
                         </div>
                         <div class="flex flex-row space-x-4">
@@ -46,6 +48,9 @@
                             <div class="flex-1">
                                 <x-time-picker label="Selesai Waktu Pulang" format="24"
                                     wire:model.defer="go_end_time" />
+                            </div>
+                            <div class="flex-1">
+                                <x-time-picker label="Waktu Pulang" format="24" wire:model.defer="go_time" />
                             </div>
                         </div>
 

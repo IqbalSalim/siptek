@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class EditWaktu extends Component
 {
-    public $timeId, $day, $come_start_time, $come_end_time, $go_start_time, $go_end_time;
+    public $timeId, $day, $come_start_time, $come_end_time, $come_time, $go_start_time, $go_end_time, $go_time;
 
     protected $listeners = ['getTime'];
 
@@ -19,14 +19,16 @@ class EditWaktu extends Component
         $this->day = $time->day;
         $this->come_start_time = $time->come_start_time;
         $this->come_end_time = $time->come_end_time;
+        $this->come_time = $time->come_time;
         $this->go_start_time = $time->go_start_time;
         $this->go_end_time = $time->go_end_time;
+        $this->go_time = $time->go_time;
         $this->timeId = $id;
     }
 
     public function closeForm()
     {
-        $this->reset('day', 'come_start_time', 'come_end_time', 'go_start_time', 'go_end_time');
+        $this->reset('day', 'come_start_time', 'come_end_time', 'come_time', 'go_start_time', 'go_end_time', 'go_time');
         $this->resetValidation();
         $this->dispatchBrowserEvent('close-modal-edit');
     }
@@ -35,8 +37,10 @@ class EditWaktu extends Component
         'day' => 'hari',
         'come_start_time' => 'Mulai waktu datang',
         'come_end_time' => 'Selesai waktu datang',
+        'come_time' => 'Waktu datang',
         'go_start_time' => 'Mulai waktu pulang',
         'go_end_time' => 'Selesai waktu pulang',
+        'go_time' => 'Waktu pulang',
 
     ];
 
@@ -45,8 +49,10 @@ class EditWaktu extends Component
         $validate = $this->validate([
             'come_start_time' => 'required|string',
             'come_end_time' => 'required|string',
+            'come_time' => 'required|string',
             'go_start_time' => 'required|string',
             'go_end_time' => 'required|string',
+            'go_time' => 'required|string',
         ]);
 
 

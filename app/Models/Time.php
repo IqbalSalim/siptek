@@ -13,7 +13,9 @@ class Time extends Model
         'day',
         'come_start_time',
         'come_end_time',
+        'come_time',
         'go_start_time',
-        'go_end_time'
+        'go_end_time',
+        'go_time',
     ];
 }
