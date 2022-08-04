@@ -23,6 +23,7 @@ class Presence extends Model
         'feedback',
         'late_minutes',
         'quick_minutes',
+        'percent',
     ];
 
     public function user()
