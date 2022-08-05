@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('quick_minutes')->nullable();
             $table->string('code')->nullable();
             $table->string('feedback')->nullable();
+            $table->float('percent')->nullable();
             $table->timestamps();
         });
     }
