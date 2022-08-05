@@ -30,6 +30,11 @@
                             {{ __('Presensi') }}
                         </x-nav-link>
                     @endcan
+                    @can('olah rekapan')
+                        <x-nav-link :href="route('rekapan')" :active="request()->routeIs('rekapan')">
+                            {{ __('Rekapan') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

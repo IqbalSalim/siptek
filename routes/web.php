@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Presensi\IndexPresensi;
+use App\Http\Livewire\Rekapan\RekapanKeseluruhan;
 use App\Http\Livewire\Tenagakontrak\IndexTenagakontrak;
 use App\Http\Livewire\Waktu\IndexWaktu;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,9 @@ Route::group(['prefix' => '/waktu', 'as' => 'waktu', 'middleware' => (['auth', '
 
 Route::group(['prefix' => '/presensi', 'as' => 'presensi', 'middleware' => (['auth', 'can:buat presensi'])], function () {
     Route::get('/', IndexPresensi::class)->name('');
+});
+Route::group(['prefix' => '/rekapan', 'as' => 'rekapan', 'middleware' => (['auth', 'can:olah rekapan'])], function () {
+    Route::get('/', RekapanKeseluruhan::class)->name('');
 });
 
 

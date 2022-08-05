@@ -27,7 +27,9 @@ class RoleSeeder extends Seeder
         $array2 = [
             'olah tk',
             'olah waktu',
+            'olah rekapan',
             'buat presensi',
+            'lihat rekapan'
         ];
 
         foreach ($array2 as $row) {
@@ -39,12 +41,14 @@ class RoleSeeder extends Seeder
         $role->givePermissionTo([
             'olah tk',
             'olah waktu',
+            'olah rekapan',
         ]);
 
         // Tambah Permission di Role Tenaga Kontrak
         $role = Role::where('name', 'tenaga kontrak')->first();
         $role->givePermissionTo([
             'buat presensi',
+            'lihat rekapan'
         ]);
     }
 }
