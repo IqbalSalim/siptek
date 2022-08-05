@@ -66,6 +66,7 @@
                                                 {{ $row['pertanggal'][$i]['code'] }}
                                                 {{ $row['pertanggal'][$i]['come_presence'] ? \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['come_presence'])->format('H:i') : null }}
                                                 {{ $row['pertanggal'][$i]['go_presence'] ? \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['go_presence'])->format('H:i') : null }}
+                                                {{ $row['pertanggal'][$i]['percent'] ? $row['pertanggal'][$i]['percent'] : null }}
                                             </td>
                                         @endfor
                                     @endif
