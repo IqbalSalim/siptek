@@ -51,10 +51,17 @@
                                         {{ $i }}
                                     </th>
                                 @endfor
+                                <th scope="col" class="px-6 py-3 border border-slate-600">
+                                    Total
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($rekapan as $row)
+                                @php
+                                    $totalTerlambat = 0;
+                                    $totalCepat = 0;
+                                @endphp
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="px-6 py-4 font-bold border border-slate-600">
@@ -66,10 +73,19 @@
                                                 {{ $row['pertanggal'][$i]['code'] }}
                                                 {{ $row['pertanggal'][$i]['come_presence'] ? \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['come_presence'])->format('H:i') : null }}
                                                 {{ $row['pertanggal'][$i]['go_presence'] ? \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['go_presence'])->format('H:i') : null }}
-                                                {{ $row['pertanggal'][$i]['percent'] ? $row['pertanggal'][$i]['percent'] : null }}
+                                                {{ $row['pertanggal'][$i]['late_minutes'] ? $row['pertanggal'][$i]['late_minutes'] : null }}
+                                                {{ $row['pertanggal'][$i]['quick_minutes'] ? $row['pertanggal'][$i]['quick_minutes'] : null }}
                                             </td>
+                                            @php
+                                                $totalTerlambat = $row['pertanggal'][$i]['late_minutes'] ? $totalTerlambat + $row['pertanggal'][$i]['late_minutes'] : $totalTerlambat;
+                                                $totalCepat = $row['pertanggal'][$i]['quick_minutes'] ? $totalCepat + $row['pertanggal'][$i]['quick_minutes'] : $totalCepat;
+                                            @endphp
                                         @endfor
                                     @endif
+                                    <td class="px-6 py-4 border border-slate-600">
+                                        <p> {{ $totalTerlambat }}</p>
+                                        <p> {{ $totalCepat }}</p>
+                                    </td>
                                 </tr>
                             @endforeach
 

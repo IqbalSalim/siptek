@@ -38,31 +38,32 @@ class RekapanKeseluruhan extends Component
                                 // $temp = date_create($this->perMonth . '-' . $j);
                                 // $b = Carbon::parse($temp)->format('Y-m-d');
                                 $b = Carbon::createFromDate($year, $month, $j);
-                                // dd($row['come_presence']);
                                 if ($b->isSaturday() || $b->isSunday()) {
                                     $array[$i]['pertanggal'][$j]['code'] = 'LJ';
                                     $array[$i]['pertanggal'][$j]['come_presence'] = null;
                                     $array[$i]['pertanggal'][$j]['go_presence'] = null;
-                                    $array[$i]['pertanggal'][$j]['percent'] = null;
+                                    $array[$i]['pertanggal'][$j]['late_minutes'] = null;
+                                    $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
                                 } elseif ($b->format('Y-m-d') == $a) {
                                     $array[$i]['pertanggal'][$j]['code'] = $row['code'] ? $row['code'] : null;
                                     $array[$i]['pertanggal'][$j]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
                                     $array[$i]['pertanggal'][$j]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
-                                    $array[$i]['pertanggal'][$j]['percent'] = $row['percent'] ? $row['percent'] : null;
+                                    $array[$i]['pertanggal'][$j]['late_minutes'] = $row['late_minutes'] ? $row['late_minutes'] : null;
+                                    $array[$i]['pertanggal'][$j]['quick_minutes'] = $row['quick_minutes'] ? $row['quick_minutes'] : null;
                                 } else {
                                     $array[$i]['pertanggal'][$j]['code'] = 'TK';
                                     $array[$i]['pertanggal'][$j]['come_presence'] = null;
                                     $array[$i]['pertanggal'][$j]['go_presence'] = null;
-                                    $array[$i]['pertanggal'][$j]['percent'] = 3;
+                                    $array[$i]['pertanggal'][$j]['late_minutes'] = null;
+                                    $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
                                 }
                             }
                         }
                     }
                 }
 
-                // dd($array[0]['pertanggal'][3]['come_presence']);
+
                 $this->rekapan = $array;
-                // dd($array);
             } else {
                 $this->rekapan = [];
             }
