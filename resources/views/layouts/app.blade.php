@@ -97,6 +97,25 @@
                     }
                 });
         });
+        window.addEventListener('swal:addDescription', event => {
+            swal({
+                    text: event.detail.message,
+                    content: "input",
+                    button: {
+                        text: "Submit",
+                        closeModal: false,
+                    },
+                })
+                .then((description) => {
+                    if (description) {
+                        window.livewire.emit('reject', description);
+                    }
+                }).then((result) => {
+                    swal.stopLoading();
+                    swal.close();
+                });
+
+        });
     </script>
 </body>
 

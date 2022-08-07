@@ -30,4 +30,11 @@ class Presence extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeCariNama($query, $nama)
+    {
+        $query->whereHas('user', function ($query) use ($nama) {
+            $query->where('name', 'like', '%' . $nama . '%');
+        });
+    }
 }

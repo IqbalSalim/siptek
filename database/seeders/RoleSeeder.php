@@ -28,6 +28,7 @@ class RoleSeeder extends Seeder
             'olah tk',
             'olah waktu',
             'olah rekapan',
+            'olah verifikasi',
             'buat presensi',
             'lihat rekapan'
         ];
@@ -42,6 +43,8 @@ class RoleSeeder extends Seeder
             'olah tk',
             'olah waktu',
             'olah rekapan',
+            'olah verifikasi',
+
         ]);
 
         // Tambah Permission di Role Tenaga Kontrak

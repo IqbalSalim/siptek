@@ -35,6 +35,11 @@
                             {{ __('Rekapan') }}
                         </x-nav-link>
                     @endcan
+                    @can('olah verifikasi')
+                        <x-nav-link :href="route('verifikasi-dl')" :active="request()->routeIs('verifikasi-dl')">
+                            {{ __('Verifikasi') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

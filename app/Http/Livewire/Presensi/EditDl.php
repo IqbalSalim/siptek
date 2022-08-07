@@ -3,47 +3,54 @@
 namespace App\Http\Livewire\Presensi;
 
 use App\Models\Presence;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DlPresensi extends Component
+class EditDl extends Component
 {
     use WithFileUploads;
 
-    public $file, $description;
+    public $file, $filePreview, $description, $idPresence, $date, $feedback;
 
-    public function save()
+    protected $listeners = ['getPresenceDl'];
+
+    public function getPresenceDl($id)
+    {
+        $presensi = Presence::find($id);
+        $this->filePreview = $presensi->file;
+        $this->description = $presensi->description;
+        $this->feedback = $presensi->feedback;
+        $this->date = $presensi->created_at;
+        $this->idPresence = $presensi->id;
+    }
+
+    public function update()
     {
         $this->validate([
             'file' => 'required|file',
             'description' => 'required|string|max:255'
         ]);
-        $userId = auth()->user()->id;
-        $dateNow = Carbon::today();
+
 
         $file = $this->file->store('files', 'public');
 
         try {
             // Transaction
-            $exception = DB::transaction(function ()  use ($userId, $dateNow, $file) {
-                $presensi = Presence::where('user_id', $userId)->whereDate('created_at', $dateNow)->first();
-                if (!empty($presensi)) {
+            $exception = DB::transaction(function ()  use ($file) {
+                $presensi = Presence::find($this->idPresence);
+                if (empty($presensi)) {
+                    dd('oke');
                     $this->dispatchBrowserEvent('swal:error', [
                         'type' => 'success',
                         'message' => 'Terjadi Kesalahan!',
-                        'text' => 'jika sudah melakukan presensi WFO maka tidak bisa presensi DL'
+                        'text' => 'presensi DL tidak ditemukan'
                     ]);
                 } else {
-                    Presence::create([
-                        'user_id' => $userId,
-                        'type' => 'DL',
+                    $presensi->update([
                         'file' => $file,
-                        'come_presence' => '00:00:00',
-                        'go_presence' => '00:00:00',
                         'description' => $this->description,
                         'status' => 'submission',
                     ]);
@@ -51,6 +58,9 @@ class DlPresensi extends Component
             });
 
             if (is_null($exception)) {
+                if (Storage::disk('public')->exists($this->filePreview)) {
+                    Storage::disk('public')->delete($this->filePreview);
+                }
                 $this->closeForm();
                 $this->dispatchBrowserEvent('swal:success', [
                     'type' => 'success',
@@ -78,6 +88,6 @@ class DlPresensi extends Component
 
         $this->reset('file', 'description');
         $this->resetValidation();
-        $this->dispatchBrowserEvent('close-modal-dl');
+        $this->dispatchBrowserEvent('close-modal-editdl');
     }
 }

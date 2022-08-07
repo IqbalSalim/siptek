@@ -39,6 +39,7 @@ class IndexPresensi extends Component
 
         return view('livewire.presensi.index-presensi', [
             'presences' => Presence::where('user_id', $this->userId)->whereYear('created_at', $this->year)->whereMonth('created_at', $this->month)->latest()->paginate(10),
+            'dinasluar' => Presence::where('user_id', $this->userId)->whereYear('created_at', $this->year)->whereMonth('created_at', $this->month)->whereNotNull('status')->latest()->paginate(10),
             'presence' => $presence,
             'come' => $presence ? $presence->come_presence : null,
             'go' => $presence ? $presence->go_presence : null,
