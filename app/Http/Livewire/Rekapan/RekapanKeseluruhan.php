@@ -45,11 +45,31 @@ class RekapanKeseluruhan extends Component
                                     $array[$i]['pertanggal'][$j]['late_minutes'] = null;
                                     $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
                                 } elseif ($b->format('Y-m-d') == $a) {
-                                    $array[$i]['pertanggal'][$j]['code'] = $row['code'] ? $row['code'] : null;
-                                    $array[$i]['pertanggal'][$j]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
-                                    $array[$i]['pertanggal'][$j]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
-                                    $array[$i]['pertanggal'][$j]['late_minutes'] = $row['late_minutes'] ? $row['late_minutes'] : null;
-                                    $array[$i]['pertanggal'][$j]['quick_minutes'] = $row['quick_minutes'] ? $row['quick_minutes'] : null;
+                                    if ($row['type'] == 'DL') {
+                                        $array[$i]['pertanggal'][$j]['code'] = $row['type'];
+                                        $array[$i]['pertanggal'][$j]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
+                                        $array[$i]['pertanggal'][$j]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
+                                    } else {
+
+
+
+                                        $array[$i]['pertanggal'][$j]['code'] = null;
+                                        $array[$i]['pertanggal'][$j]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
+                                        $array[$i]['pertanggal'][$j]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
+                                        $array[$i]['pertanggal'][$j]['late_minutes'] = $row['late_minutes'] ? $row['late_minutes'] : null;
+                                        $array[$i]['pertanggal'][$j]['quick_minutes'] = $row['quick_minutes'] ? $row['quick_minutes'] : null;
+
+                                        $code = $row['code']  ? explode(",", $row['code']) : null;
+                                        if ($code) {
+                                            foreach ($code as $r) {
+                                                if (substr($r, 0, 1) == 'T') {
+                                                    $array[$i]['pertanggal'][$j]['come_code'] = $r;
+                                                } else {
+                                                    $array[$i]['pertanggal'][$j]['go_code'] = $r;
+                                                }
+                                            }
+                                        }
+                                    }
                                 } else {
                                     $array[$i]['pertanggal'][$j]['code'] = 'TK';
                                     $array[$i]['pertanggal'][$j]['come_presence'] = null;

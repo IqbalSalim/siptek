@@ -71,10 +71,12 @@
                                         @for ($i = 1; $i <= $this->countDays; $i++)
                                             <td class="px-6 py-4 border border-slate-600">
                                                 {{ $row['pertanggal'][$i]['code'] }}
-                                                {{ $row['pertanggal'][$i]['come_presence'] ? \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['come_presence'])->format('H:i') : null }}
-                                                {{ $row['pertanggal'][$i]['go_presence'] ? \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['go_presence'])->format('H:i') : null }}
-                                                {{ $row['pertanggal'][$i]['late_minutes'] ? $row['pertanggal'][$i]['late_minutes'] : null }}
-                                                {{ $row['pertanggal'][$i]['quick_minutes'] ? $row['pertanggal'][$i]['quick_minutes'] : null }}
+                                                {{ $row['pertanggal'][$i]['come_presence'] ? 'Jam Masuk: ' . \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['come_presence'])->format('H:i') : null }}
+                                                {{ $row['pertanggal'][$i]['go_presence'] ? 'Jam Pulang: ' . \Carbon\Carbon::createFromFormat('H:i:s', $row['pertanggal'][$i]['go_presence'])->format('H:i') : null }}
+                                                <br>
+                                                {{ $row['pertanggal'][$i]['late_minutes'] ? 'Terlambat :' . $row['pertanggal'][$i]['late_minutes'] . ' (' . $row['pertanggal'][$i]['come_code'] . ')' : null }}
+                                                <br>
+                                                {{ $row['pertanggal'][$i]['quick_minutes'] ? 'Cepat Pulang :' . $row['pertanggal'][$i]['quick_minutes'] . ' (' . $row['pertanggal'][$i]['go_code'] . ')' : null }}
                                             </td>
                                             @php
                                                 $totalTerlambat = $row['pertanggal'][$i]['late_minutes'] ? $totalTerlambat + $row['pertanggal'][$i]['late_minutes'] : $totalTerlambat;
