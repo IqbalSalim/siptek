@@ -30,7 +30,7 @@
                                         </span>
                                     </div>
                                     <div>
-                                        <label for="kdAnggota">Bidang</label>
+                                        <label for="areaId">Bidang</label>
                                         <select wire:model.defer='areaId' class="mt-1">
                                             <option value=""></option>
                                             @foreach ($areas as $row)
@@ -38,7 +38,7 @@
                                             @endforeach
                                         </select>
                                         <span class="text-xs text-red-700">
-                                            @error('kdAnggota')
+                                            @error('areaId')
                                                 {{ $message }}
                                             @enderror
                                         </span>

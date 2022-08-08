@@ -28,7 +28,7 @@ class TambahTenagakontrak extends Component
     }
 
     protected $rules = [
-        'kdAnggota' => 'required|string|max:16|unique:employees,member_id',
+        'kdAnggota' => 'required|numeric|digits:5|unique:employees,member_id',
         'areaId' => 'required|integer',
         'nama' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
