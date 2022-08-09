@@ -14,12 +14,22 @@ class DlPresensi extends Component
 {
     use WithFileUploads;
 
-    public $file, $description;
+    public $file, $description, $preview;
+
+
+    public function check()
+    {
+
+        $this->validate([
+            'file' => 'mimes:pdf|max:2048',
+        ]);
+        $this->preview = $this->file;
+    }
 
     public function save()
     {
         $this->validate([
-            'file' => 'required|file',
+            'file' => 'mimes:pdf|max:2048',
             'description' => 'required|string|max:255'
         ]);
         $userId = auth()->user()->id;

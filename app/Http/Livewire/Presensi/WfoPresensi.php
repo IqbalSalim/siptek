@@ -20,7 +20,7 @@ class WfoPresensi extends Component
     public function save()
     {
         $this->validate([
-            'foto' => 'required|image',
+            'foto' => 'mimes:png,jpg,webp,heic',
         ]);
         $userId = auth()->user()->id;
         $dateNow = Carbon::today();

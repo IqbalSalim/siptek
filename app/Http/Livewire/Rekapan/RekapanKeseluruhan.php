@@ -30,59 +30,68 @@ class RekapanKeseluruhan extends Component
                 $this->countDays = Carbon::parse($this->perMonth)->daysInMonth;
 
                 for ($i = 0; $i < count($presensi); $i++) {
+                    $array[$i]['nama'] = $presensi[$i]['name'];
                     if (count($presensi[$i]['presences'])) {
-                        $array[$i]['nama'] = $presensi[$i]['name'];
-                        for ($j = 1; $j <= $this->countDays; $j++) {
-                            foreach ($presensi[$i]['presences'] as $row) {
-                                $a = Carbon::parse($row['created_at'])->format('Y-m-d');
-                                // $temp = date_create($this->perMonth . '-' . $j);
-                                // $b = Carbon::parse($temp)->format('Y-m-d');
-                                $b = Carbon::createFromDate($year, $month, $j);
-                                if ($b->isSaturday() || $b->isSunday()) {
-                                    $array[$i]['pertanggal'][$j]['code'] = 'LJ';
-                                    $array[$i]['pertanggal'][$j]['come_presence'] = null;
-                                    $array[$i]['pertanggal'][$j]['go_presence'] = null;
-                                    $array[$i]['pertanggal'][$j]['late_minutes'] = null;
-                                    $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
-                                } elseif ($b->format('Y-m-d') == $a) {
-                                    if ($row['type'] == 'DL') {
-                                        $array[$i]['pertanggal'][$j]['code'] = $row['type'];
-                                        $array[$i]['pertanggal'][$j]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
-                                        $array[$i]['pertanggal'][$j]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
-                                    } else {
+                        foreach ($presensi[$i]['presences'] as $row) {
+                            $a = Carbon::parse($row['created_at'])->format('Y-m-d');
+                            $b = (int) Carbon::parse($row['created_at'])->format('d');
 
+                            if ($row['type'] == 'DL') {
+                                $array[$i]['pertanggal'][$b]['code'] = 'DL';
+                                $array[$i]['pertanggal'][$b]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
+                                $array[$i]['pertanggal'][$b]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
+                                $array[$i]['pertanggal'][$b]['late_minutes'] = null;
+                                $array[$i]['pertanggal'][$b]['quick_minutes'] = null;
+                                // dd('oke');
+                            } else {
+                                $array[$i]['pertanggal'][$b]['code'] = null;
+                                $array[$i]['pertanggal'][$b]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
+                                $array[$i]['pertanggal'][$b]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
+                                $array[$i]['pertanggal'][$b]['late_minutes'] = $row['late_minutes'] ? $row['late_minutes'] : null;
+                                $array[$i]['pertanggal'][$b]['quick_minutes'] = $row['quick_minutes'] ? $row['quick_minutes'] : null;
 
-
-                                        $array[$i]['pertanggal'][$j]['code'] = null;
-                                        $array[$i]['pertanggal'][$j]['come_presence'] = $row['come_presence'] ? $row['come_presence'] : null;
-                                        $array[$i]['pertanggal'][$j]['go_presence'] = $row['go_presence'] ? $row['go_presence'] : null;
-                                        $array[$i]['pertanggal'][$j]['late_minutes'] = $row['late_minutes'] ? $row['late_minutes'] : null;
-                                        $array[$i]['pertanggal'][$j]['quick_minutes'] = $row['quick_minutes'] ? $row['quick_minutes'] : null;
-
-                                        $code = $row['code']  ? explode(",", $row['code']) : null;
-                                        if ($code) {
-                                            foreach ($code as $r) {
-                                                if (substr($r, 0, 1) == 'T') {
-                                                    $array[$i]['pertanggal'][$j]['come_code'] = $r;
-                                                } else {
-                                                    $array[$i]['pertanggal'][$j]['go_code'] = $r;
-                                                }
-                                            }
+                                $code = $row['code']  ? explode(",", $row['code']) : null;
+                                if ($code) {
+                                    foreach ($code as $r) {
+                                        if (substr($r, 0, 1) == 'T') {
+                                            $array[$i]['pertanggal'][$b]['come_code'] = $r;
+                                        } else {
+                                            $array[$i]['pertanggal'][$b]['go_code'] = $r;
                                         }
                                     }
-                                } else {
-                                    $array[$i]['pertanggal'][$j]['code'] = 'TK';
-                                    $array[$i]['pertanggal'][$j]['come_presence'] = null;
-                                    $array[$i]['pertanggal'][$j]['go_presence'] = null;
-                                    $array[$i]['pertanggal'][$j]['late_minutes'] = null;
-                                    $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
                                 }
                             }
                         }
                     }
                 }
 
+                for ($i = 0; $i < count($presensi); $i++) {
+                    for ($j = 1; $j <= $this->countDays; $j++) {
+                        if (!isset($array[$i]['pertanggal'][$j])) {
+                            $b = Carbon::createFromDate($year, $month, $j);
+                            if ($b->isSaturday() || $b->isSunday()) {
+                                $array[$i]['pertanggal'][$j]['code'] = 'LJ';
+                                $array[$i]['pertanggal'][$j]['come_presence'] = null;
+                                $array[$i]['pertanggal'][$j]['go_presence'] = null;
+                                $array[$i]['pertanggal'][$j]['late_minutes'] = null;
+                                $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
+                            } else {
+                                $array[$i]['pertanggal'][$j]['code'] = 'TK';
+                                $array[$i]['pertanggal'][$j]['come_presence'] = null;
+                                $array[$i]['pertanggal'][$j]['go_presence'] = null;
+                                $array[$i]['pertanggal'][$j]['late_minutes'] = null;
+                                $array[$i]['pertanggal'][$j]['quick_minutes'] = null;
+                            }
+                        }
+                    }
+                }
 
+                for ($i = 0; $i < count($presensi); $i++) {
+                    for ($j = 1; $j <= $this->countDays; $j++) {
+                        $temp[$j] = $array[$i]['pertanggal'][$j];
+                    }
+                    $array[$i]['pertanggal'] = $temp;
+                }
                 $this->rekapan = $array;
             } else {
                 $this->rekapan = [];

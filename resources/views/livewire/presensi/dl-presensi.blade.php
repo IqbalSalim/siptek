@@ -21,7 +21,7 @@
                             <label class="text-center">Surat Tugas</label>
                             <div class="mt-1">
                                 <div>
-                                    <embed class="w-full" src="{{ $file ? $file->temporaryUrl() : '' }}"
+                                    <embed class="w-full" src="{{ $preview ? $preview->temporaryUrl() : '' }}"
                                         type="application/pdf">
                                 </div>
 
@@ -29,7 +29,7 @@
                         </div>
                         <div>
                             <label for="file">File</label>
-                            <input type="file" wire:model.defer='file' name="file">
+                            <input type="file" wire:change.debounce.500ms='check' wire:model='file' name="file">
                             <span class="block text-xs text-red-700">
                                 @error('file')
                                     {{ $message }}
