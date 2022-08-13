@@ -49,7 +49,7 @@
                     <div class="font-medium text-gray-500 capitalize">{{ Auth::user()->name }}</div>
                     <x-dropdown>
                         <x-dropdown.header label="Settings">
-                            <x-dropdown.item icon="cog" label="Preferences" />
+                            <x-dropdown.item href='ubah-password' icon="cog" label="Ubah Password" />
                             <x-dropdown.item icon="user" label="My Profile" />
                         </x-dropdown.header>
 

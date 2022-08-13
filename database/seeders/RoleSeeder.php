@@ -16,21 +16,22 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $array = [
-            'admin',
-            'tenaga kontrak',
-        ];
-        foreach ($array as $row) {
-            Role::create(['name' => $row]);
-        }
+        // $array = [
+        //     'admin',
+        //     'tenaga kontrak',
+        // ];
+        // foreach ($array as $row) {
+        //     Role::create(['name' => $row]);
+        // }
 
         $array2 = [
-            'olah tk',
-            'olah waktu',
-            'olah rekapan',
-            'olah verifikasi',
-            'buat presensi',
-            'lihat rekapan'
+            // 'olah tk',
+            // 'olah waktu',
+            // 'olah rekapan',
+            // 'olah verifikasi',
+            // 'buat presensi',
+            // 'lihat rekapan',
+            'ubah password'
         ];
 
         foreach ($array2 as $row) {
@@ -40,18 +41,20 @@ class RoleSeeder extends Seeder
         // Tambah Permission di Role Admin
         $role = Role::where('name', 'admin')->first();
         $role->givePermissionTo([
-            'olah tk',
-            'olah waktu',
-            'olah rekapan',
-            'olah verifikasi',
+            // 'olah tk',
+            // 'olah waktu',
+            // 'olah rekapan',
+            // 'olah verifikasi',
+            'ubah password',
 
         ]);
 
         // Tambah Permission di Role Tenaga Kontrak
         $role = Role::where('name', 'tenaga kontrak')->first();
         $role->givePermissionTo([
-            'buat presensi',
-            'lihat rekapan'
+            // 'buat presensi',
+            // 'lihat rekapan',
+            'ubah password',
         ]);
     }
 }

@@ -76,8 +76,17 @@
                             <div class="flex flex-col space-y-4">
                                 <div>
                                     <label for="pendidikan">Pendidikan Terakhir</label>
-                                    <input type="text" wire:model='pendidikan' name="pendidikan" id="pendidikan"
-                                        class="mt-1">
+                                    <select wire:model.defer='pendidikan' class="mt-1">
+                                        <option value=""></option>
+                                        <option value="SMA/Sederajat">SMA/Sederajat</option>
+                                        <option value="D1">D1</option>
+                                        <option value="D2">D2</option>
+                                        <option value="D3">D3</option>
+                                        <option value="S1">S1</option>
+                                        <option value="S2">S2</option>
+                                        <option value="S3">S3</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
                                     <span class="text-xs text-red-700">
                                         @error('pendidikan')
                                             {{ $message }}
