@@ -30,4 +30,9 @@ class UbahPassword extends Component
 
         return redirect()->route('logout.destroy');
     }
+
+    public function kembali()
+    {
+        return redirect()->route('dashboard');
+    }
 }

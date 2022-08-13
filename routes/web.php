@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Livewire\Presensi\IndexPresensi;
+use App\Http\Livewire\Rekapan\Rekap;
 use App\Http\Livewire\Rekapan\RekapanKeseluruhan;
 use App\Http\Livewire\Tenagakontrak\IndexTenagakontrak;
 use App\Http\Livewire\Tenagakontrak\UbahPassword;
@@ -49,6 +50,9 @@ Route::group(['prefix' => '/verifikasi-dl', 'as' => 'verifikasi-dl', 'middleware
 
 Route::group(['prefix' => '/ubah-password', 'as' => 'ubah-password', 'middleware' => (['auth', 'can:ubah password'])], function () {
     Route::get('/', UbahPassword::class)->name('');
+});
+Route::group(['prefix' => '/laporan', 'as' => 'laporan', 'middleware' => (['auth', 'can:ubah password'])], function () {
+    Route::get('/', Rekap::class)->name('');
 });
 
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.destroy');

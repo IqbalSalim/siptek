@@ -2120,9 +2120,6 @@ input[type="range"]::-ms-fill-lower {
 .self-start {
   align-self: flex-start;
 }
-.self-end {
-  align-self: flex-end;
-}
 .self-center {
   align-self: center;
 }
@@ -2248,13 +2245,13 @@ input[type="range"]::-ms-fill-lower {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
-.border-slate-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(100 116 139 / var(--tw-border-opacity));
-}
 .border-slate-600 {
   --tw-border-opacity: 1;
   border-color: rgb(71 85 105 / var(--tw-border-opacity));
+}
+.border-slate-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(100 116 139 / var(--tw-border-opacity));
 }
 .border-secondary-200 {
   --tw-border-opacity: 1;

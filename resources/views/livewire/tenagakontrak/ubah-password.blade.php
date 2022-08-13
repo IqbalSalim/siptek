@@ -20,7 +20,7 @@
                     <h2 class="mb-2 text-xl font-semibold dark:text-white">Ubah Password</h2>
                 </div>
                 <div>
-                    <button class="btn-primary">Kembali</button>
+                    <button wire:click='kembali' class="btn-primary">Kembali</button>
                 </div>
             </div>
             <div class="flex flex-row items-start p-4 space-x-8 md:w-1/2">

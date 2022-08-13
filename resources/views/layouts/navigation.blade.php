@@ -40,6 +40,11 @@
                             {{ __('Verifikasi') }}
                         </x-nav-link>
                     @endcan
+                    @can('rekapan tk')
+                        <x-nav-link :href="route('laporan')" :active="request()->routeIs('laporan')">
+                            {{ __('Laporan') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -50,10 +55,8 @@
                     <x-dropdown>
                         <x-dropdown.header label="Settings">
                             <x-dropdown.item href='ubah-password' icon="cog" label="Ubah Password" />
-                            <x-dropdown.item icon="user" label="My Profile" />
-                        </x-dropdown.header>
 
-                        <x-dropdown.item separator label="Help Center" />
+                        </x-dropdown.header>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-dropdown.item label="Logout" :href="route('logout')"

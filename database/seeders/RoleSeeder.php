@@ -31,7 +31,8 @@ class RoleSeeder extends Seeder
             // 'olah verifikasi',
             // 'buat presensi',
             // 'lihat rekapan',
-            'ubah password'
+            // 'ubah password',
+            'rekapan tk'
         ];
 
         foreach ($array2 as $row) {
@@ -39,22 +40,23 @@ class RoleSeeder extends Seeder
         }
 
         // Tambah Permission di Role Admin
-        $role = Role::where('name', 'admin')->first();
-        $role->givePermissionTo([
-            // 'olah tk',
-            // 'olah waktu',
-            // 'olah rekapan',
-            // 'olah verifikasi',
-            'ubah password',
+        // $role = Role::where('name', 'admin')->first();
+        // $role->givePermissionTo([
+        //     // 'olah tk',
+        //     // 'olah waktu',
+        //     // 'olah rekapan',
+        //     // 'olah verifikasi',
+        //     // 'ubah password',
 
-        ]);
+        // ]);
 
         // Tambah Permission di Role Tenaga Kontrak
         $role = Role::where('name', 'tenaga kontrak')->first();
         $role->givePermissionTo([
             // 'buat presensi',
             // 'lihat rekapan',
-            'ubah password',
+            // 'ubah password',
+            'rekapan tk'
         ]);
     }
 }
