@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CetakLaporan;
 use App\Http\Livewire\Presensi\IndexPresensi;
 use App\Http\Livewire\Rekapan\Rekap;
 use App\Http\Livewire\Rekapan\RekapanKeseluruhan;
@@ -54,6 +55,8 @@ Route::group(['prefix' => '/ubah-password', 'as' => 'ubah-password', 'middleware
 Route::group(['prefix' => '/laporan', 'as' => 'laporan', 'middleware' => (['auth', 'can:ubah password'])], function () {
     Route::get('/', Rekap::class)->name('');
 });
+
+Route::post('generate-pdf-laporan-presensi',  [CetakLaporan::class, 'generatePDF'])->middleware(['auth', 'can:cetak laporan'])->name('cetak-laporan');
 
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.destroy');
 

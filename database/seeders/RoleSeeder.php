@@ -32,7 +32,8 @@ class RoleSeeder extends Seeder
             // 'buat presensi',
             // 'lihat rekapan',
             // 'ubah password',
-            'rekapan tk'
+            // 'rekapan tk',
+            'cetak laporan',
         ];
 
         foreach ($array2 as $row) {
@@ -56,7 +57,8 @@ class RoleSeeder extends Seeder
             // 'buat presensi',
             // 'lihat rekapan',
             // 'ubah password',
-            'rekapan tk'
+            // 'rekapan tk',
+            'cetak laporan',
         ]);
     }
 }
