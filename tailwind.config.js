@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: "class",
+    darkMode: "false",
     presets: [require("./vendor/wireui/wireui/tailwind.config.js")],
     content: [
         "./resources/**/*.blade.php",

@@ -43,7 +43,7 @@
     </div>
     @livewireScripts
 
-    <script>
+    {{-- <script>
         window
             .matchMedia("(prefers-color-scheme: dark)")
             .addEventListener("change", function(e) {
@@ -61,7 +61,7 @@
         } else {
             document.getElementById("logo").src = "{{ asset('images/logo.png') }}";
         }
-    </script>
+    </script> --}}
 
     <script>
         window.addEventListener('swal:success', event => {

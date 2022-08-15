@@ -22,7 +22,7 @@
     <div class="font-sans antialiased text-gray-900 dark:bg-slate-800">
         {{ $slot }}
     </div>
-    <script>
+    {{-- <script>
         window
             .matchMedia("(prefers-color-scheme: dark)")
             .addEventListener("change", function(e) {
@@ -40,7 +40,7 @@
         } else {
             document.getElementById("logo").src = "{{ asset('images/logo.png') }}";
         }
-    </script>
+    </script> --}}
 </body>
 
 
