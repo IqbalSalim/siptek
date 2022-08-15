@@ -1,24 +1,28 @@
 <?php
 
-namespace App\Http\Livewire\Rekapan;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\CetakRekapan;
 use App\Models\User;
 use Carbon\Carbon;
-use Livewire\Component;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromView;
+use Illuminate\Contracts\View\View;
 
-class RekapanKeseluruhan extends Component
+
+class CetakRekapan implements FromView
 {
-    public $perMonth, $rekapan = [], $countDays;
+    protected $perMonth;
 
-    public function render()
+    function __construct($perMonth)
     {
-        return view('livewire.rekapan.rekapan-keseluruhan');
+        $this->perMonth = $perMonth;
     }
 
-    public function filter()
+
+    public function view(): View
     {
+
+        $rekapan = [];
+        $countDays = null;
         if ($this->perMonth) {
             $year = Carbon::createFromFormat('Y-m', $this->perMonth)->format('Y');
             $month = Carbon::createFromFormat('Y-m', $this->perMonth)->format('m');
@@ -29,7 +33,7 @@ class RekapanKeseluruhan extends Component
 
             if (count($presensi) > 0) {
                 $array = [];
-                $this->countDays = Carbon::parse($this->perMonth)->daysInMonth;
+                $countDays = Carbon::parse($this->perMonth)->daysInMonth;
 
                 for ($i = 0; $i < count($presensi); $i++) {
                     $array[$i]['nama'] = $presensi[$i]['name'];
@@ -68,7 +72,7 @@ class RekapanKeseluruhan extends Component
                 }
 
                 for ($i = 0; $i < count($presensi); $i++) {
-                    for ($j = 1; $j <= $this->countDays; $j++) {
+                    for ($j = 1; $j <= $countDays; $j++) {
                         if (!isset($array[$i]['pertanggal'][$j])) {
                             $b = Carbon::createFromDate($year, $month, $j);
                             if ($b->isSaturday() || $b->isSunday()) {
@@ -89,20 +93,23 @@ class RekapanKeseluruhan extends Component
                 }
 
                 for ($i = 0; $i < count($presensi); $i++) {
-                    for ($j = 1; $j <= $this->countDays; $j++) {
+                    for ($j = 1; $j <= $countDays; $j++) {
                         $temp[$j] = $array[$i]['pertanggal'][$j];
                     }
                     $array[$i]['pertanggal'] = $temp;
                 }
-                $this->rekapan = $array;
+                $rekapan = $array;
             } else {
-                $this->rekapan = [];
+                $rekapan = [];
             }
         }
-    }
 
-    public function cetakExcel()
-    {
-        return Excel::download(new CetakRekapan($this->perMonth), 'rekapanpresensi.xlsx');
+        $periode = Carbon::parse($this->perMonth)->format('M Y');
+
+        return view('cetak.rekapan', [
+            'rekapan' => $rekapan,
+            'countDays' => $countDays,
+            'periode' => $periode,
+        ]);
     }
 }

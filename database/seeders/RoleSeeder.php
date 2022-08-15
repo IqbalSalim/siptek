@@ -36,6 +36,7 @@ class RoleSeeder extends Seeder
             // 'cetak laporan',
             // 'dashboard admin',
             // 'dashboard tk',
+            'cetak rekapan',
         ];
 
         foreach ($array2 as $row) {
@@ -50,19 +51,20 @@ class RoleSeeder extends Seeder
             // 'olah rekapan',
             // 'olah verifikasi',
             // 'ubah password',
-            'dashboard admin',
+            // 'dashboard admin',
+            'cetak rekapan',
 
         ]);
 
         // Tambah Permission di Role Tenaga Kontrak
-        $role = Role::where('name', 'tenaga kontrak')->first();
-        $role->givePermissionTo([
-            // 'buat presensi',
-            // 'lihat rekapan',
-            // 'ubah password',
-            // 'rekapan tk',
-            // 'cetak laporan',
-            'dashboard tk',
-        ]);
+        // $role = Role::where('name', 'tenaga kontrak')->first();
+        // $role->givePermissionTo([
+        //     // 'buat presensi',
+        //     // 'lihat rekapan',
+        //     // 'ubah password',
+        //     // 'rekapan tk',
+        //     // 'cetak laporan',
+        //     'dashboard tk',
+        // ]);
     }
 }

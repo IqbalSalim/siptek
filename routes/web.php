@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CetakLaporan;
+use App\Http\Controllers\CetakRekapan;
 use App\Http\Livewire\Dashboard\IndexDashboard;
 use App\Http\Livewire\Presensi\IndexPresensi;
 use App\Http\Livewire\Rekapan\Rekap;
@@ -57,6 +58,7 @@ Route::group(['prefix' => '/laporan', 'as' => 'laporan', 'middleware' => (['auth
 });
 
 Route::post('generate-pdf-laporan-presensi',  [CetakLaporan::class, 'generatePDF'])->middleware(['auth', 'can:cetak laporan'])->name('cetak-laporan');
+// Route::post('generate-excel-rekapan-presensi',  [CetakRekapan::class, 'view'])->middleware(['auth', 'can:cetak rekapan'])->name('cetak-rekapan');
 
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.destroy');
 

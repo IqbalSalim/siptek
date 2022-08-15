@@ -10,7 +10,7 @@
         </div>
     </x-slot>
 
-    {{-- <livewire:waktu.edit-waktu></livewire:waktu.edit-waktu> --}}
+
 
     <div id="content">
         {{-- Tabel Rekapan --}}
@@ -20,20 +20,30 @@
                     <h2 class="mb-2 text-xl font-semibold dark:text-white">Rekapan</h2>
                 </div>
             </div>
-            <div class="flex flex-row items-end p-4 space-x-4 bg-white dark:bg-gray-800">
-                <div>
-                    <label for="table-search">Pilih Bulan Rekapan</label>
-                    <input type="month" wire:model='perMonth' class="mt-1">
+            <div class="flex flex-row items-end justify-between p-4 space-x-4 bg-white dark:bg-gray-800">
+                <div class="flex flex-row items-end space-x-4">
+                    <div>
+                        <label for="table-search">Pilih Bulan Rekapan</label>
+                        <input type="month" wire:model='perMonth' class="mt-1">
+                    </div>
+                    <div>
+                        <button class="btn-primary btn-icon" @click="rekapan=true" wire:click='filter'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            </svg>
+                            Filter
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <button class="btn-primary btn-icon" @click="rekapan=true" wire:click='filter'>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                        </svg>
-                        Filter
-                    </button>
+                <div x-show='rekapan'>
+                    <button wire:click='cetakExcel' class="btn-primary">Cetak Excel</button>
+                    {{-- <form action="{{ route('cetak-rekapan') }}" method="POST" target="_blank" novalidate>
+                        @csrf
+                        <input type="hidden" name="tanggal" value="{{ $perMonth }}">
+                        <button type="submit" class="btn-primary">Cetak Excel</button>
+                    </form> --}}
                 </div>
             </div>
 
