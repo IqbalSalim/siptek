@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CetakLaporan;
+use App\Http\Livewire\Dashboard\IndexDashboard;
 use App\Http\Livewire\Presensi\IndexPresensi;
 use App\Http\Livewire\Rekapan\Rekap;
 use App\Http\Livewire\Rekapan\RekapanKeseluruhan;
@@ -10,6 +11,7 @@ use App\Http\Livewire\Tenagakontrak\UbahPassword;
 use App\Http\Livewire\Verifikasi\DinasLuar;
 use App\Http\Livewire\Waktu\IndexWaktu;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,7 @@ Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', IndexDashboard::class)->middleware(['auth'])->name('dashboard');
 
 Route::group(['prefix' => '/tenaga-kontrak', 'as' => 'tenaga-kontrak', 'middleware' => (['auth', 'can:olah tk'])], function () {
     Route::get('/', IndexTenagakontrak::class)->name('');
