@@ -16,26 +16,26 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        // $array = [
-        //     'admin',
-        //     'tenaga kontrak',
-        // ];
-        // foreach ($array as $row) {
-        //     Role::create(['name' => $row]);
-        // }
+        $array = [
+            'admin',
+            'tenaga kontrak',
+        ];
+        foreach ($array as $row) {
+            Role::create(['name' => $row]);
+        }
 
         $array2 = [
-            // 'olah tk',
-            // 'olah waktu',
-            // 'olah rekapan',
-            // 'olah verifikasi',
-            // 'buat presensi',
-            // 'lihat rekapan',
-            // 'ubah password',
-            // 'rekapan tk',
-            // 'cetak laporan',
-            // 'dashboard admin',
-            // 'dashboard tk',
+            'olah tk',
+            'olah waktu',
+            'olah rekapan',
+            'olah verifikasi',
+            'buat presensi',
+            'lihat rekapan',
+            'ubah password',
+            'rekapan tk',
+            'cetak laporan',
+            'dashboard admin',
+            'dashboard tk',
             'cetak rekapan',
         ];
 
@@ -46,25 +46,25 @@ class RoleSeeder extends Seeder
         // Tambah Permission di Role Admin
         $role = Role::where('name', 'admin')->first();
         $role->givePermissionTo([
-            // 'olah tk',
-            // 'olah waktu',
-            // 'olah rekapan',
-            // 'olah verifikasi',
-            // 'ubah password',
-            // 'dashboard admin',
+            'olah tk',
+            'olah waktu',
+            'olah rekapan',
+            'olah verifikasi',
+            'ubah password',
+            'dashboard admin',
             'cetak rekapan',
 
         ]);
 
         // Tambah Permission di Role Tenaga Kontrak
-        // $role = Role::where('name', 'tenaga kontrak')->first();
-        // $role->givePermissionTo([
-        //     // 'buat presensi',
-        //     // 'lihat rekapan',
-        //     // 'ubah password',
-        //     // 'rekapan tk',
-        //     // 'cetak laporan',
-        //     'dashboard tk',
-        // ]);
+        $role = Role::where('name', 'tenaga kontrak')->first();
+        $role->givePermissionTo([
+            'buat presensi',
+            'lihat rekapan',
+            'ubah password',
+            'rekapan tk',
+            'cetak laporan',
+            'dashboard tk',
+        ]);
     }
 }
