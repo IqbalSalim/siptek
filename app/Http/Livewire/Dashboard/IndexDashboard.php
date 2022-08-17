@@ -35,6 +35,9 @@ class IndexDashboard extends Component
             $this->submission = Presence::where('type', 'DL')->where('status', 'submission')->count();
             $this->rejected = Presence::where('type', 'DL')->where('status', 'rejected')->count();
             $this->approve = Presence::where('type', 'DL')->where('status', 'approved')->count();
+            $this->employees = User::whereHas('roles', function ($q) {
+                $q->where('name', 'tenaga kontrak');
+            })->count();
         }
 
 

@@ -70,7 +70,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <h1 class="text-4xl font-medium text-right text-white">{{ $submission ? $submission : 0 }}</h1>
+                        <h1 class="text-4xl font-medium text-right text-white">{{ $employees ? $employees : 0 }}</h1>
                     </a>
                 </div>
             </div>
