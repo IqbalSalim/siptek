@@ -39,43 +39,83 @@ class WfoPresensi extends Component
                 $presensi = Presence::where('user_id', $userId)->whereDate('created_at', $dateNow)->first();
                 $time = Time::where('day', 'like', $day)->first();
 
-                if (!empty($presensi)) {
-                    $a = Carbon::parse($timeNow);
-                    $b = Carbon::parse($time->go_time);
-                    $percent = null;
-                    $code = null;
-                    $selisih = null;
-                    if ($a->lt($b)) {
-                        $selisih = $a->diffInMinutes($b);
-                        gmdate('H:i:s', $selisih);
-                    }
 
-                    if ($selisih >= 1 && $selisih <= 30) {
-                        $percent = 0;
-                        $code = 'CP1';
-                    } elseif ($selisih >= 31 && $selisih <= 60) {
-                        $percent = 0.5;
-                        $code = 'CP2';
-                    } elseif ($selisih >= 61 && $selisih <= 90) {
-                        $percent = 1;
-                        $code = 'CP3';
-                    } elseif ($selisih > 90) {
-                        $percent = 1.25;
-                        $code = 'CP4';
-                    } else {
+                if (Carbon::parse($timeNow)->gt($time->come_end_time)) {
+                    if (!empty($presensi)) {
+                        $a = Carbon::parse($timeNow);
+                        $b = Carbon::parse($time->go_time);
                         $percent = null;
                         $code = null;
-                    }
+                        $selisih = null;
+                        if ($a->lt($b)) {
+                            $selisih = $a->diffInMinutes($b);
+                            gmdate('H:i:s', $selisih);
+                        }
 
-                    $presensi->update([
-                        'user_id' => $userId,
-                        'type' => 'WFO',
-                        'go_photo' => $foto,
-                        'go_presence' => $timeNow,
-                        'quick_minutes' => $selisih,
-                        'code' => $presensi->code . ', ' . $code,
-                        'percent' => $presensi->percent + $percent,
-                    ]);
+                        if ($selisih >= 1 && $selisih <= 30) {
+                            $percent = 0;
+                            $code = 'CP1';
+                        } elseif ($selisih >= 31 && $selisih <= 60) {
+                            $percent = 0.5;
+                            $code = 'CP2';
+                        } elseif ($selisih >= 61 && $selisih <= 90) {
+                            $percent = 1;
+                            $code = 'CP3';
+                        } elseif ($selisih > 90) {
+                            $percent = 1.25;
+                            $code = 'CP4';
+                        } else {
+                            $percent = null;
+                            $code = null;
+                        }
+
+                        $presensi->update([
+                            'user_id' => $userId,
+                            'type' => 'WFO',
+                            'go_photo' => $foto,
+                            'go_presence' => $timeNow,
+                            'quick_minutes' => $selisih,
+                            'code' => $presensi->code . ', ' . $code,
+                            'percent' => $presensi->percent + $percent,
+                        ]);
+                    } else {
+                        $a = Carbon::parse($timeNow);
+                        $b = Carbon::parse($time->go_time);
+                        $percent = null;
+                        $code = null;
+                        $selisih = null;
+                        if ($a->lt($b)) {
+                            $selisih = $a->diffInMinutes($b);
+                            gmdate('H:i:s', $selisih);
+                        }
+
+                        if ($selisih >= 1 && $selisih <= 30) {
+                            $percent = 0;
+                            $code = 'CP1';
+                        } elseif ($selisih >= 31 && $selisih <= 60) {
+                            $percent = 0.5;
+                            $code = 'CP2';
+                        } elseif ($selisih >= 61 && $selisih <= 90) {
+                            $percent = 1;
+                            $code = 'CP3';
+                        } elseif ($selisih > 90) {
+                            $percent = 1.25;
+                            $code = 'CP4';
+                        } else {
+                            $percent = null;
+                            $code = null;
+                        }
+
+                        Presence::create([
+                            'user_id' => $userId,
+                            'type' => 'WFO',
+                            'go_photo' => $foto,
+                            'go_presence' => $timeNow,
+                            'quick_minutes' => $selisih,
+                            'code' => $presensi ? $presensi->code . ', ' . $code : $code,
+                            'percent' => $presensi ? $presensi->percent + $percent : $percent,
+                        ]);
+                    }
                 } else {
                     $a = Carbon::parse($timeNow);
                     $b = Carbon::parse($time->come_time);

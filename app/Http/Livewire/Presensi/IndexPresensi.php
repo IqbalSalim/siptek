@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Presensi;
 
 use App\Models\Presence;
+use App\Models\Time;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,12 +12,18 @@ class IndexPresensi extends Component
 {
     use WithPagination;
 
-    public $userId, $date, $year, $month, $perMonth, $day = 0;
+    public $userId, $date, $year, $month, $perMonth, $day = 0, $openPresence;
 
     protected $listeners = ['render'];
 
     public function mount()
     {
+        $timeNow = Carbon::now()->format('H:i:m');
+        $day = Carbon::now()->isoFormat('dddd');
+        $time = Time::where('day', 'like', $day)->first()->come_start_time;
+
+        $this->openPresence = Carbon::parse($timeNow)->gt($time);
+
         $this->userId = auth()->user()->id;
         $this->year = Carbon::now()->format('Y');
         $this->month = Carbon::now()->format('m');
@@ -27,6 +34,7 @@ class IndexPresensi extends Component
     public function render()
     {
         $this->date = Carbon::today()->subDays($this->day);
+
         $presence = Presence::where('user_id', $this->userId)->whereDate('created_at', $this->date)->first();
         $presenceToDay = Presence::where('user_id', $this->userId)->whereDate('created_at', Carbon::now())->first();
         $comeToDay = null;

@@ -33,8 +33,8 @@
             </div>
             <div class="flex flex-row justify-center space-x-4">
                 <div class="flex flex-col items-center">
-                    <button {{ $typeToDay == 'DL' ? 'disabled' : null }}
-                        class="shadow-lg {{ $typeToDay == 'DL' ? 'btn-danger cursor-not-allowed' : 'btn-primary' }}"
+                    <button {{ $typeToDay == 'DL' ? 'disabled' : null }} {{ $openPresence ? null : 'disabled' }}
+                        class="shadow-lg {{ $typeToDay == 'DL' ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresence ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
                         @click='modalWfo=true'>
                         <x-ilustration.wfo class="w-32 h-32" />
                         <span class="font-bold text-white">W F O</span>
@@ -42,7 +42,8 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <button {{ $typeToDay == 'WFO' || $file ? 'disabled' : null }}
-                        class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }}"
+                        {{ $openPresence ? null : 'disabled' }}
+                        class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresence ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
                         @click='modalDl=true'>
                         <x-ilustration.dl class="w-32 h-32" />
                         <span class="font-bold text-white">D L</span>
@@ -78,6 +79,7 @@
                 <div class="grid grid-cols-3 gap-6 py-4">
                     <div class="flex flex-col items-center">
                         <h2 class="text-2xl font-bold">
+
                             {{ $come ? \Carbon\Carbon::createFromFormat('H:i:s', $come)->format('H:i') : '--:--' }}
                         </h2>
                         <span class="font-medium text-gray-400">Datang</span>
@@ -106,6 +108,8 @@
                         <input type="month" wire:model='perMonth' wire:change='changePerMonth'>
                     </div>
                 </div>
+
+
                 <div class="flex flex-col divide-y-2">
                     @if ($presences)
                         @foreach ($presences as $row)
@@ -119,10 +123,9 @@
                                         <p class="font-medium text">{{ $row->created_at->isoFormat('dddd, D MMMM Y') }}
                                         </p>
                                         <span class="block text-xs font-medium text-gray-800">Datang:
-                                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->come_presence)->format('H:i') }},
+                                            {{ $row->come_presence ? \Carbon\Carbon::createFromFormat('H:i:s', $row->come_presence)->format('H:i') : '--:--' }},
                                             Pulang:
                                             {{ $row->go_presence ? \Carbon\Carbon::createFromFormat('H:i:s', $row->go_presence)->format('H:i') : '--:--' }}</span>
-
                                     </div>
                                 </div>
                                 <div class="px-6 py-2">
@@ -141,6 +144,7 @@
                             Data Kosong
                         </div>
                     @endif
+
 
 
                 </div>
