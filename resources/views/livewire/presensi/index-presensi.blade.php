@@ -33,8 +33,8 @@
             </div>
             <div class="flex flex-row justify-center space-x-4">
                 <div class="flex flex-col items-center">
-                    <button {{ $typeToDay == 'DL' ? 'disabled' : null }} {{ $openPresence ? null : 'disabled' }}
-                        class="shadow-lg {{ $typeToDay == 'DL' ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresence ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
+                    <button {{ $typeToDay == 'DL' ? 'disabled' : null }} {{ $openPresenceWFO ? null : 'disabled' }}
+                        class="shadow-lg {{ $typeToDay == 'DL' ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresenceWFO ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
                         @click='modalWfo=true'>
                         <x-ilustration.wfo class="w-32 h-32" />
                         <span class="font-bold text-white">W F O</span>
@@ -42,8 +42,8 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <button {{ $typeToDay == 'WFO' || $file ? 'disabled' : null }}
-                        {{ $openPresence ? null : 'disabled' }}
-                        class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresence ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
+                        {{ $openPresenceDL ? null : 'disabled' }}
+                        class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresenceDL ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
                         @click='modalDl=true'>
                         <x-ilustration.dl class="w-32 h-32" />
                         <span class="font-bold text-white">D L</span>

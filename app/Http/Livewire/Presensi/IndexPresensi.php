@@ -12,7 +12,7 @@ class IndexPresensi extends Component
 {
     use WithPagination;
 
-    public $userId, $date, $year, $month, $perMonth, $day = 0, $openPresence;
+    public $userId, $date, $year, $month, $perMonth, $day = 0, $openPresenceWFO, $openPresenceDL;
 
     protected $listeners = ['render'];
 
@@ -20,9 +20,30 @@ class IndexPresensi extends Component
     {
         $timeNow = Carbon::now()->format('H:i:m');
         $day = Carbon::now()->isoFormat('dddd');
-        $time = Time::where('day', 'like', $day)->first()->come_start_time;
+        $time = Time::where('day', 'like', $day)->first();
+        if (empty($time)) {
+            $this->openPresenceWFO = false;
+            $this->openPresenceDL = false;
+        } else {
+            $comeStartTime = $time->come_start_time;
+            $comeEndTime = $time->come_end_time;
+            $presenceToDay = Presence::where('user_id', auth()->user()->id)->whereDate('created_at', Carbon::now())->first();
+            // dd($presenceToDay);
 
-        $this->openPresence = Carbon::parse($timeNow)->gt($time);
+            if (Carbon::parse($timeNow)->gt($comeStartTime) && Carbon::parse($timeNow)->lt($comeEndTime)) {
+                $this->openPresenceWFO = true;
+            } else if (Carbon::parse($timeNow)->gt($comeStartTime) && Carbon::parse($timeNow)->gt($comeEndTime) && !empty($presenceToDay)) {
+                $this->openPresenceWFO = true;
+            } else {
+                $this->openPresenceWFO = false;
+            }
+
+            if (Carbon::parse($timeNow)->gt('08:00:00') && Carbon::parse($timeNow)->lt('16:00:00')) {
+                $this->openPresenceDL = true;
+            } else {
+                $this->openPresenceDL = false;
+            }
+        }
 
         $this->userId = auth()->user()->id;
         $this->year = Carbon::now()->format('Y');
