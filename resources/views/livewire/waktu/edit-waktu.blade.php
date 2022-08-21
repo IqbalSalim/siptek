@@ -14,7 +14,7 @@
                     </svg>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit Tenaga Kontrak</h3>
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit Waktu Presensi</h3>
                     <form class="space-y-6" wire:submit.prevent="update" novalidate>
                         @csrf
                         <div class="col-span-2">
