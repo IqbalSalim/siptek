@@ -10,13 +10,15 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
     <wireui:scripts />
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+
+    <!-- Styles -->
+    @vite('resources/js/app.js')
+
+
+
     @livewireStyles
     <style>
         [x-cloak] {
@@ -82,7 +84,6 @@
                 buttons: "Periksa",
             });
         });
-
         window.addEventListener('swal:confirm', event => {
             swal({
                     title: 'Apakah anda yakin?',

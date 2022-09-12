@@ -1,4 +1,6 @@
 import "./bootstrap";
+import '../css/app.css';
+
 
 import Alpine from "alpinejs";
 import flowbite from "flowbite";

@@ -1,6 +1,6 @@
 <div>
     <div x-show="modalWfo"
-        class="fixed top-0 left-0 right-0 z-50 flex items-center w-full overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 md:inset-0 h-modal md:h-full">
+        class="fixed top-0 left-0 right-0 z-50 flex items-center w-full overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 md:inset-0 h-full md:h-full">
         <div class="relative w-full h-full max-w-xl p-4 mx-auto md:h-auto">
             <!-- Modal content -->
             <div
@@ -29,7 +29,7 @@
                                         <input type="file" wire:model.defer='foto' name="foto">
                                         <span class="block text-xs text-red-700">
                                             @error('foto')
-                                                {{ $message }}
+                                            {{ $message }}
                                             @enderror
                                         </span>
                                     </div>

@@ -16,34 +16,34 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @can('olah tk')
-                        <x-nav-link :href="route('tenaga-kontrak')" :active="request()->routeIs('tenaga-kontrak')">
-                            {{ __('Tenaga Kontrak') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('tenaga-kontrak')" :active="request()->routeIs('tenaga-kontrak')">
+                        {{ __('Tenaga Kontrak') }}
+                    </x-nav-link>
                     @endcan
                     @can('olah waktu')
-                        <x-nav-link :href="route('waktu')" :active="request()->routeIs('waktu')">
-                            {{ __('Waktu Presensi') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('waktu')" :active="request()->routeIs('waktu')">
+                        {{ __('Waktu Presensi') }}
+                    </x-nav-link>
                     @endcan
                     @can('buat presensi')
-                        <x-nav-link :href="route('presensi')" :active="request()->routeIs('presensi')">
-                            {{ __('Presensi') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('presensi')" :active="request()->routeIs('presensi')">
+                        {{ __('Presensi') }}
+                    </x-nav-link>
                     @endcan
                     @can('olah rekapan')
-                        <x-nav-link :href="route('rekapan')" :active="request()->routeIs('rekapan')">
-                            {{ __('Rekapan') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('rekapan')" :active="request()->routeIs('rekapan')">
+                        {{ __('Rekapan') }}
+                    </x-nav-link>
                     @endcan
                     @can('olah verifikasi')
-                        <x-nav-link :href="route('verifikasi-dl')" :active="request()->routeIs('verifikasi-dl')">
-                            {{ __('Verifikasi') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('verifikasi-dl')" :active="request()->routeIs('verifikasi-dl')">
+                        {{ __('Verifikasi') }}
+                    </x-nav-link>
                     @endcan
                     @can('rekapan tk')
-                        <x-nav-link :href="route('laporan')" :active="request()->routeIs('laporan')">
-                            {{ __('Laporan') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('laporan')" :active="request()->routeIs('laporan')">
+                        {{ __('Laporan') }}
+                    </x-nav-link>
                     @endcan
                 </div>
             </div>
@@ -59,8 +59,7 @@
                         </x-dropdown.header>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-dropdown.item label="Logout" :href="route('logout')"
-                                onclick="event.preventDefault();
+                            <x-dropdown.item label="Logout" :href="route('logout')" onclick="event.preventDefault();
                                             this.closest('form').submit();" />
                         </form>
                     </x-dropdown>
@@ -89,6 +88,41 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @can('olah tk')
+            <x-responsive-nav-link :href="route('tenaga-kontrak')" :active="request()->routeIs('tenaga-kontrak')">
+                {{ __('Tenaga Kontrak') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('olah waktu')
+            <x-responsive-nav-link :href="route('waktu')" :active="request()->routeIs('waktu')">
+                {{ __('Waktu') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('buat presensi')
+            <x-responsive-nav-link :href="route('presensi')" :active="request()->routeIs('presensi')">
+                {{ __('Presensi') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('olah rekapan')
+            <x-responsive-nav-link :href="route('rekapan')" :active="request()->routeIs('rekapan')">
+                {{ __('Rekapan') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('olah verifikasi')
+            <x-responsive-nav-link :href="route('verifikasi-dl')" :active="request()->routeIs('verifikasi-dl')">
+                {{ __('Verifikasi') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('rekapan tk')
+            <x-responsive-nav-link :href="route('laporan')" :active="request()->routeIs('laporan')">
+                {{ __('Laporan') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('ubah password')
+            <x-responsive-nav-link :href="route('ubah-password')" :active="request()->routeIs('ubah-password')">
+                {{ __('Ubah Password') }}
+            </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
@@ -103,8 +137,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

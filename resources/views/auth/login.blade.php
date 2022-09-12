@@ -16,7 +16,7 @@
 
             <!-- Email Address -->
             <div class="dark:bg-slate-800">
-                <label for="password">Email</label>
+                <label for="email">Email</label>
                 <x-input id="email"
                     class="block w-full mt-1 dark:focus:ring-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:placeholder-gray-400 "
                     type="email" name="email" :value="old('email')" required autofocus />
@@ -39,10 +39,10 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="text-sm text-gray-600 underline dark:text-gray-300 hover:text-gray-900"
-                        href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+                <a class="text-sm text-gray-600 underline dark:text-gray-300 hover:text-gray-900"
+                    href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
                 @endif
 
                 <button type="submit" class="ml-4 btn-primary">

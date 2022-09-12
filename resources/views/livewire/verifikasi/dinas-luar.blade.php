@@ -43,7 +43,7 @@
                                 </svg>
                             </div>
                             <input type="text" id="table-search" wire:model='search'
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block md:w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Cari berdasarkan nama">
                         </div>
                     </div>
@@ -51,6 +51,7 @@
             </div>
 
             @if ($presences->isNotEmpty())
+            <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -74,59 +75,59 @@
                     </thead>
                     <tbody>
                         @foreach ($presences as $row)
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    <div class="flex flex-row space-x-3">
-                                        <div class="w-10 h-10">
-                                            <img src="{{ asset($row->user->employee->image) }}" alt=""
-                                                class="object-cover w-10 h-10 rounded-lg">
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-800 dark:text-white">
-                                                {{ $row->user->name }}</p>
-                                            <span class="text-xs text-gray-400">{{ $row->member_id }}
-                                                {{ $row->user->email }}</span>
-                                        </div>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <div class="flex flex-row space-x-3">
+                                    <div class="w-10 h-10">
+                                        <img src="{{ asset($row->user->employee->image) }}" alt=""
+                                            class="object-cover w-10 h-10 rounded-lg">
                                     </div>
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $row->created_at->isoFormat('dddd, D MMMM Y') }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $row->description }}
-                                </td>
-                                <td @class([
-                                    'px-6 py-4 uppercase font-medium',
-                                    'text-yellow-500' => $row->status == 'submission',
-                                    'text-green-500' => $row->status == 'approved',
-                                    'text-red-500' => $row->status == 'rejected',
+                                    <div>
+                                        <p class="font-medium text-gray-800 dark:text-white">
+                                            {{ $row->user->name }}</p>
+                                        <span class="text-xs text-gray-400">{{ $row->member_id }}
+                                            {{ $row->user->email }}</span>
+                                    </div>
+                                </div>
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $row->created_at->isoFormat('dddd, D MMMM Y') }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $row->description }}
+                            </td>
+                            <td @class([ 'px-6 py-4 uppercase font-medium' , 'text-yellow-500'=> $row->status ==
+                                'submission',
+                                'text-green-500' => $row->status == 'approved',
+                                'text-red-500' => $row->status == 'rejected',
                                 ])>
-                                    {{ $row->status }}
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <button @click="modalVerifikasi=true"
-                                        wire:click.prevent="$emit('getVerifikasi', {{ $row->id }})"
-                                        class="px-3 btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>
+                                {{ $row->status }}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button @click="modalVerifikasi=true"
+                                    wire:click.prevent="$emit('getVerifikasi', {{ $row->id }})"
+                                    class="px-3 btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
                         @endforeach
 
                     </tbody>
                 </table>
-                {{ $presences->links() }}
+            </div>
+            {{ $presences->links() }}
             @else
-                <p class="px-4 py-2 mt-2 text-2xl font-bold text-center text-red-500 animate-pulse">
-                    Data tidak ditemukan!
-                </p>
+            <p class="px-4 py-2 mt-2 text-2xl font-bold text-center text-red-500 animate-pulse">
+                Data tidak ditemukan!
+            </p>
             @endif
         </div>
         {{-- End Tabel Tenaga Kontrak --}}

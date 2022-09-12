@@ -53,7 +53,7 @@ Route::group(['prefix' => '/verifikasi-dl', 'as' => 'verifikasi-dl', 'middleware
 Route::group(['prefix' => '/ubah-password', 'as' => 'ubah-password', 'middleware' => (['auth', 'can:ubah password'])], function () {
     Route::get('/', UbahPassword::class)->name('');
 });
-Route::group(['prefix' => '/laporan', 'as' => 'laporan', 'middleware' => (['auth', 'can:ubah password'])], function () {
+Route::group(['prefix' => '/laporan', 'as' => 'laporan', 'middleware' => (['auth', 'can:rekapan tk'])], function () {
     Route::get('/', Rekap::class)->name('');
 });
 

@@ -17,15 +17,15 @@
                     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Tambah Tenaga Kontrak</h3>
                     <form class="space-y-6" wire:submit.prevent="store" novalidate>
                         @csrf
-                        <div class="grid grid-cols-2 space-x-6">
+                        <div class="grid grid-cols-1 md:space-x-6 md:grid-cols-2">
                             <div class="flex flex-col space-y-4">
-                                <div class="flex flex-row space-x-2">
+                                <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-2 md:flex-row">
                                     <div class="flex-1">
                                         <label for="kdAnggota">Kode Anggota</label>
                                         <input type="text" wire:model.defer='kdAnggota' class="mt-1">
                                         <span class="text-xs text-red-700">
                                             @error('kdAnggota')
-                                                {{ $message }}
+                                            {{ $message }}
                                             @enderror
                                         </span>
                                     </div>
@@ -34,12 +34,12 @@
                                         <select wire:model.defer='areaId' class="mt-1">
                                             <option value=""></option>
                                             @foreach ($areas as $row)
-                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
                                             @endforeach
                                         </select>
                                         <span class="text-xs text-red-700">
                                             @error('areaId')
-                                                {{ $message }}
+                                            {{ $message }}
                                             @enderror
                                         </span>
                                     </div>
@@ -49,26 +49,26 @@
                                     <input type="text" wire:model.defer='nama' class="mt-1">
                                     <span class="text-xs text-red-700">
                                         @error('nama')
-                                            {{ $message }}
+                                        {{ $message }}
                                         @enderror
                                     </span>
                                 </div>
                                 <div>
                                     <label for="email">Email</label>
-                                    <input type="email" wire:model='email' name="email" id="email"
-                                        class="mt-1">
+                                    <input type="email" wire:model='email' name="email" id="email" class="mt-1">
                                     <span class="text-xs text-red-700">
                                         @error('email')
-                                            {{ $message }}
+                                        {{ $message }}
                                         @enderror
                                     </span>
                                 </div>
                                 <div class="flex-1">
                                     <label for="alamat">Alamat</label>
-                                    <textarea type="text" name="alamat" id="alamat" wire:model='alamat' class="mt-1"></textarea>
+                                    <textarea type="text" name="alamat" id="alamat" wire:model='alamat'
+                                        class="mt-1"></textarea>
                                     <span class="text-xs text-red-700">
                                         @error('alamat')
-                                            {{ $message }}
+                                        {{ $message }}
                                         @enderror
                                     </span>
                                 </div>
@@ -89,18 +89,17 @@
                                     </select>
                                     <span class="text-xs text-red-700">
                                         @error('pendidikan')
-                                            {{ $message }}
+                                        {{ $message }}
                                         @enderror
                                     </span>
                                 </div>
                                 <div class="flex flex-row space-x-2">
                                     <div class="flex-1">
                                         <label for="tempat">Tempat Lahir</label>
-                                        <input type="text" name="tempat" wire:model='tempat' id="tempat"
-                                            class="mt-1">
+                                        <input type="text" name="tempat" wire:model='tempat' id="tempat" class="mt-1">
                                         <span class="text-xs text-red-700">
                                             @error('tempat')
-                                                {{ $message }}
+                                            {{ $message }}
                                             @enderror
                                         </span>
                                     </div>
@@ -110,7 +109,7 @@
                                             class="mt-1">
                                         <span class="text-xs text-red-700">
                                             @error('tanggal')
-                                                {{ $message }}
+                                            {{ $message }}
                                             @enderror
                                         </span>
                                     </div>
@@ -118,11 +117,10 @@
 
                                 <div>
                                     <label for="nohp">Nomor Handphone</label>
-                                    <input type="tel" name="nohp" id="nohp" wire:model='nohp'
-                                        class="mt-1">
+                                    <input type="tel" name="nohp" id="nohp" wire:model='nohp' class="mt-1">
                                     <span class="text-xs text-red-700">
                                         @error('nohp')
-                                            {{ $message }}
+                                        {{ $message }}
                                         @enderror
                                     </span>
                                 </div>
@@ -137,7 +135,7 @@
                                             <input type="file" wire:model.defer='foto' name="foto">
                                             <span class="block text-xs text-red-700">
                                                 @error('foto')
-                                                    {{ $message }}
+                                                {{ $message }}
                                                 @enderror
                                             </span>
                                         </div>
