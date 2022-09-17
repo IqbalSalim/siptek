@@ -16,7 +16,7 @@
     <livewire:presensi.edit-dl></livewire:presensi.edit-dl>
 
     <div id="content">
-        <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row -mt-8 md:space-x-4">
+        <div class="flex flex-col -mt-8 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
             <div class="p-4 bg-blue-500 bg-opacity-50 rounded-lg">
                 <h2 class="font-bold text-white">Rule Presensi Online</h2>
                 <ul class="px-4 font-medium text-gray-800 list-decimal">
@@ -51,12 +51,12 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row mt-4 md:space-x-4">
+        <div class="flex flex-col mt-4 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
             {{-- Tabel Waktu Presensi --}}
             <div class="relative w-full overflow-x-auto border shadow-md md:w-1/2 sm:rounded-lg dark:border-gray-700">
                 <div class="flex flex-row items-center justify-between p-4 bg-white dark:bg-gray-800">
                     <div>
-                        <p class="md:text-lg font-semibold dark:text-white">Presensi Per Hari</p>
+                        <p class="font-semibold md:text-lg dark:text-white">Presensi Per Hari</p>
                         <span class="text-sm font-medium text-gray-400">
                             {{ $presence ? $presence->created_at->isoFormat('dddd, D MMMM Y') : $date->isoFormat('dddd,
                             D MMMM Y') }}
@@ -102,7 +102,7 @@
                 {{-- Tabel Presensi Bulan --}}
                 <div class="flex flex-row items-start justify-between p-4 bg-white dark:bg-gray-800">
                     <div>
-                        <p class="md:text-lg font-semibold dark:text-white">Presensi Per Bulan</p>
+                        <p class="font-semibold md:text-lg dark:text-white">Presensi Per Bulan</p>
                         <span class="text-sm font-medium text-gray-400">Juli, 2022</span>
                     </div>
                     <div>

@@ -1,4 +1,4 @@
-<div x-cloak x-data="{ rekapan: true }" x-on:close-rekapan="rekapan=false">
+<div x-cloak x-data="{ rekapan: false }" x-on:close-rekapan="rekapan=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-white">
             {{ __('Laporan') }}

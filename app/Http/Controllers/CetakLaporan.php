@@ -108,6 +108,6 @@ class CetakLaporan extends Controller
         ];
 
         $pdf = Pdf::loadView('cetak.laporan', $data)->setPaper('A4', 'potrait');
-        return $pdf->download('laporanpresensi.pdf');
+        return $pdf->stream('laporanpresensi.pdf');
     }
 }

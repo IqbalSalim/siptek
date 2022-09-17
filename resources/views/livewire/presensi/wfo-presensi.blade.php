@@ -1,6 +1,6 @@
 <div>
     <div x-show="modalWfo"
-        class="fixed top-0 left-0 right-0 z-50 flex items-center w-full overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 md:inset-0 h-full md:h-full">
+        class="fixed top-0 left-0 right-0 z-50 flex items-center w-full h-full overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 md:inset-0 md:h-full">
         <div class="relative w-full h-full max-w-xl p-4 mx-auto md:h-auto">
             <!-- Modal content -->
             <div
@@ -22,7 +22,7 @@
                                 <label for="foto" class="text-center">Foto</label>
                                 <div class="flex flex-col items-center justify-center mt-1 space-y-2">
                                     <div>
-                                        <img src="{{ $foto ? $foto->temporaryUrl() : asset('images/no-image.jfif') }}"
+                                        <img src="{{ $foto ? $foto->temporaryUrl() : asset('images/no-image.png') }}"
                                             alt="" class="object-cover rounded-lg w-60 h-60">
                                     </div>
                                     <div>
