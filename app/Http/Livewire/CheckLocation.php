@@ -17,7 +17,9 @@ class CheckLocation extends Component
     public function checkLocation($id)
     {
         $location = Presence::find($id);
-        dd($location);
+
+        $longlat = explode(",", $location->longlat);
+        $this->dispatchBrowserEvent('getlocation', ['long' => $longlat[0], 'lat' => (float)$longlat[1]]);
     }
 
     public function closeLocation()

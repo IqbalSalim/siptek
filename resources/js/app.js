@@ -28,7 +28,7 @@ var setting = {
     projection: 'globe' // display the map as a 3D globe
 };
 
-var long = "1";
+var long = "";
 var lat = "";
 
 
@@ -75,8 +75,26 @@ function closeMapBox() {
     location.reload();
 }
 
+
 // document.getElementById("btn-modalDl").addEventListener("click", loadMapbox);
 window.addEventListener('setMap', loadMapbox);
+window.addEventListener('getlocation', (event) => {
+    const setting = {
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [event.detail.lat, event.detail.long],
+        zoom: 16, // starting zoom
+        projection: 'globe' // display the map as a 3D globe
+    };
+
+    const map = new mapboxgl.Map(setting);
+
+    const marker = new mapboxgl.Marker()
+        .setLngLat([event.detail.lat, event.detail.long])
+        .addTo(map);
+});
+window.addEventListener('runmaps', loadMapbox);
+
 document.getElementById("btn-close-modalDl").addEventListener("click", closeMapBox);
 
 document.getElementById("btn-submit-dlpre").addEventListener("click", () => {
@@ -84,5 +102,3 @@ document.getElementById("btn-submit-dlpre").addEventListener("click", () => {
     // console.log(myFile.value);
     window.livewire.emit('setLonglat', long, lat);
 });
-
-window.addEventListener('runmaps', loadMapbox);

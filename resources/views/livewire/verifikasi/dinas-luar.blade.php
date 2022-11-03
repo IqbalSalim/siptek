@@ -111,7 +111,7 @@
                             <td class="px-6 py-4 text-right">
                                 <button @click="modalCheckLocation=true"
                                     wire:click.prevent="$emit('checkLocation', {{ $row->id }})"
-                                    class="px-3 btn-primary">
+                                    class="px-3 bg-orange-500 btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
