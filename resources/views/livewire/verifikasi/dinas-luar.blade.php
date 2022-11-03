@@ -1,4 +1,5 @@
-<div x-cloak x-data="{ modalVerifikasi: false }" x-on:close-modal-verifikasi="modalVerifikasi=false">
+<div x-cloak x-data="{ modalVerifikasi: false, modalCheckLocation: false }"
+    x-on:close-modal-verifikasi="modalVerifikasi=false" x-on:close-modal-check-location="modalCheckLocation=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-white">
             {{ __('Verifikasi') }}
@@ -11,6 +12,7 @@
     </x-slot>
 
     <livewire:verifikasi.modal-verifikasi></livewire:verifikasi.modal-verifikasi>
+    <livewire:check-location></livewire:check-location>
 
     <div id="content">
         {{-- Tabel Tenaga Kontrak --}}
@@ -107,6 +109,19 @@
                                 {{ $row->status }}
                             </td>
                             <td class="px-6 py-4 text-right">
+                                <button @click="modalCheckLocation=true"
+                                    wire:click.prevent="$emit('checkLocation', {{ $row->id }})"
+                                    class="px-3 btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                    </svg>
+
+
+                                </button>
                                 <button @click="modalVerifikasi=true"
                                     wire:click.prevent="$emit('getVerifikasi', {{ $row->id }})"
                                     class="px-3 btn-primary">

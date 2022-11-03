@@ -9,6 +9,10 @@
     </x-slot>
 
 
+
+
+
+
     <div id="content">
 
 
@@ -121,36 +125,36 @@
                 <div class="grid grid-cols-3 gap-6 px-4 py-4">
                     <div class="p-4 rounded-lg from-orange-500 via-yellow-500 bg-gradient-to-r to-amber-500">
                         <div class="flex flex-row items-start justify-between">
-                            <h2 class="font-medium md:text-base text-xs text-white">Submission</h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="md:w-8 md:h-8 w-4 h-4 text-white" fill="none"
+                            <h2 class="text-xs font-medium text-white md:text-base">Submission</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white md:w-8 md:h-8" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
                             </svg>
                         </div>
-                        <h1 class="text-2xl md:text-4xl font-medium text-white">{{ $submission ? $submission : 0 }}</h1>
+                        <h1 class="text-2xl font-medium text-white md:text-4xl">{{ $submission ? $submission : 0 }}</h1>
                     </div>
                     <div class="p-4 rounded-lg from-red-500 via-rose-500 bg-gradient-to-r to-pink-500">
                         <div class="flex flex-row items-start justify-between">
-                            <h2 class="font-medium md:text-base text-xs text-white">Rejected</h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="md:w-8 md:h-8 w-4 h-4 text-white" fill="none"
+                            <h2 class="text-xs font-medium text-white md:text-base">Rejected</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white md:w-8 md:h-8" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                             </svg>
                         </div>
-                        <h1 class="text-2xl md:text-4xl font-medium text-white">{{ $rejected ? $rejected : 0 }}</h1>
+                        <h1 class="text-2xl font-medium text-white md:text-4xl">{{ $rejected ? $rejected : 0 }}</h1>
                     </div>
                     <div class="p-4 rounded-lg from-blue-500 via-indigo-500 bg-gradient-to-r to-violet-500">
                         <div class="flex flex-row items-start justify-between">
-                            <h2 class="font-medium md:text-base text-xs text-white">Approve</h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="md:w-8 md:h-8 w-4 h-4 text-white" fill="none"
+                            <h2 class="text-xs font-medium text-white md:text-base">Approve</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white md:w-8 md:h-8" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h1 class="text-2xl md:text-4xl font-medium text-white">{{ $approve ? $approve : 0 }}</h1>
+                        <h1 class="text-2xl font-medium text-white md:text-4xl">{{ $approve ? $approve : 0 }}</h1>
                     </div>
                 </div>
             </div>

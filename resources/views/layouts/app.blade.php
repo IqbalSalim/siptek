@@ -17,12 +17,18 @@
     <!-- Styles -->
     @vite('resources/js/app.js')
 
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet' />
+
 
 
     @livewireStyles
     <style>
         [x-cloak] {
             display: none
+        }
+
+        #map {
+            height: 300px;
         }
     </style>
 </head>
@@ -44,26 +50,6 @@
         </main>
     </div>
     @livewireScripts
-
-    {{-- <script>
-        window
-            .matchMedia("(prefers-color-scheme: dark)")
-            .addEventListener("change", function(e) {
-                const colorScheme = e.matches ? "dark" : "light";
-                console.log(colorScheme);
-                if (colorScheme === 'dark') {
-                    document.getElementById("logo").src = "{{ asset('images/logo-putih.png') }}";
-                } else {
-                    document.getElementById("logo").src = "{{ asset('images/logo.png') }}";
-                }
-            });
-
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.getElementById("logo").src = "{{ asset('images/logo-putih.png') }}";
-        } else {
-            document.getElementById("logo").src = "{{ asset('images/logo.png') }}";
-        }
-    </script> --}}
 
     <script>
         window.addEventListener('swal:success', event => {
@@ -117,7 +103,12 @@
                 });
 
         });
+
+        
     </script>
+
+
+
 </body>
 
 </html>

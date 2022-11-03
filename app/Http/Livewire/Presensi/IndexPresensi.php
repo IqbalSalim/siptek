@@ -16,6 +16,8 @@ class IndexPresensi extends Component
 
     protected $listeners = ['render'];
 
+
+
     public function mount()
     {
         $timeNow = Carbon::now()->format('H:i:m');

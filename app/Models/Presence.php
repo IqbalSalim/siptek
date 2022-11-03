@@ -24,6 +24,7 @@ class Presence extends Model
         'late_minutes',
         'quick_minutes',
         'percent',
+        'longlat',
     ];
 
     public function user()

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Presensi;
 use App\Models\Presence;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -14,16 +15,33 @@ class DlPresensi extends Component
 {
     use WithFileUploads;
 
-    public $file, $description, $preview;
+    public $file, $description, $preview, $longlat;
+
+    protected $listeners = ['renderDLP', 'setLonglat'];
 
 
-    public function check()
+
+    public function setLonglat($long, $lat)
     {
+        $array[0] = $lat;
+        $array[1] = $long;
+        $this->longlat = implode(",", $array);
+    }
 
-        $this->validate([
-            'file' => 'mimes:pdf|max:2048',
-        ]);
-        $this->preview = $this->file;
+    public function renderDLP()
+    {
+        return view('livewire.presensi.dl-presensi');
+    }
+
+    public function setMap()
+    {
+        $this->dispatchBrowserEvent('setMap');
+    }
+
+
+    public function runmap()
+    {
+        $this->dispatchBrowserEvent('runmaps');
     }
 
     public function save()
@@ -56,6 +74,7 @@ class DlPresensi extends Component
                         'go_presence' => '00:00:00',
                         'description' => $this->description,
                         'status' => 'submission',
+                        'longlat' => $this->longlat,
                     ]);
                 }
             });
@@ -85,7 +104,6 @@ class DlPresensi extends Component
 
     public function closeForm()
     {
-
         $this->reset('file', 'description');
         $this->resetValidation();
         $this->dispatchBrowserEvent('close-modal-dl');

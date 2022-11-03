@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->string('feedback')->nullable();
             $table->float('percent')->nullable();
+            $table->string('longlat')->nullable();
             $table->timestamps();
         });
     }

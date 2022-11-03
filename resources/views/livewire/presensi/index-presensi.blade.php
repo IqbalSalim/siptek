@@ -1,4 +1,4 @@
-<div x-cloak x-data="{ modalWfo: false, modalDl: false, modalEditDl: false }" x-on:close-modal-wfo="modalWfo=false"
+<div x-cloak x-data="{ modalWfo: false, modalDl:false, modalEditDl: false }" x-on:close-modal-wfo="modalWfo=false"
     x-on:close-modal-dl="modalDl=false" x-on:close-modal-editdl="modalEditDl=false">
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-white">
@@ -40,9 +40,11 @@
                         <span class="font-bold text-white">W F O</span>
                     </button>
                 </div>
+
                 <div class="flex flex-col items-center">
-                    <button {{ $typeToDay=='WFO' || $file ? 'disabled' : null }} {{ $openPresenceDL ? null : 'disabled'
-                        }}
+                    {{-- {{ $typeToDay=='WFO' || $file ? 'disabled' : null }} {{ $openPresenceDL ? null : 'disabled'
+                    }} --}}
+                    <button id="btn-modalDl"
                         class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresenceDL ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
                         @click='modalDl=true'>
                         <x-ilustration.dl class="w-32 h-32" />
@@ -58,7 +60,8 @@
                     <div>
                         <p class="font-semibold md:text-lg dark:text-white">Presensi Per Hari</p>
                         <span class="text-sm font-medium text-gray-400">
-                            {{ $presence ? $presence->created_at->isoFormat('dddd, D MMMM Y') : $date->isoFormat('dddd,
+                            {{ $presence ? $presence->created_at->isoFormat('dddd, D MMMM Y') :
+                            $date->isoFormat('dddd,
                             D MMMM Y') }}
                         </span>
                     </div>
