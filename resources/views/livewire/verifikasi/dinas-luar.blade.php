@@ -12,6 +12,7 @@
     </x-slot>
 
     <livewire:verifikasi.modal-verifikasi></livewire:verifikasi.modal-verifikasi>
+    
     <livewire:check-location></livewire:check-location>
 
     <div id="content">
