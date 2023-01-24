@@ -15,6 +15,7 @@
                 </button>
                 <div class="px-6 py-6 lg:px-8">
                     <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Lokasi</h3>
+                    <p class="text-center">Longitude: <span>{{ $long }}</span> --- Latitude: <span>{{ $lat }}</span></p>
                     <div id="map"></div>
                 </div>
             </div>

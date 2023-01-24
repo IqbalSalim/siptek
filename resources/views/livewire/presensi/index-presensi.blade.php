@@ -42,9 +42,9 @@
                 </div>
 
                 <div class="flex flex-col items-center">
-                    {{-- {{ $typeToDay=='WFO' || $file ? 'disabled' : null }} {{ $openPresenceDL ? null : 'disabled'
-                    }} --}}
-                    <button id="btn-modalDl"
+
+                    <button id="btn-modalDl" {{ $typeToDay=='WFO' || $file ? 'disabled' : null }} {{ $openPresenceDL ?
+                        null : 'disabled' }}
                         class="shadow-lg {{ $typeToDay == 'WFO' || $file ? 'btn-danger cursor-not-allowed' : 'btn-primary' }} {{ $openPresenceDL ? 'btn-primary' : 'btn-danger cursor-not-allowed' }}"
                         @click='modalDl=true'>
                         <x-ilustration.dl class="w-32 h-32" />

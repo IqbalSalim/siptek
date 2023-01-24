@@ -8,6 +8,7 @@ use Livewire\Component;
 class CheckLocation extends Component
 {
     protected $listeners = ['checkLocation'];
+    public $long, $lat;
 
     public function render()
     {
@@ -19,7 +20,9 @@ class CheckLocation extends Component
         $location = Presence::find($id);
 
         $longlat = explode(",", $location->longlat);
-        $this->dispatchBrowserEvent('getlocation', ['long' => $longlat[0], 'lat' => (float)$longlat[1]]);
+        $this->long = (float)$longlat[0];
+        $this->lat = (float)$longlat[1];
+        $this->dispatchBrowserEvent('getlocation', ['long' => (float)$longlat[0], 'lat' => (float)$longlat[1]]);
     }
 
     public function closeLocation()
